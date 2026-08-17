@@ -1,0 +1,31 @@
+{
+  "name": "operava-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing site for Operava LLC — custom software for landscaping companies.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "next": "16.3.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "22.18.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "eslint": "9.39.1",
+    "eslint-config-next": "16.3.1",
+    "prettier": "^3.6.2",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3"
+  }
+}
