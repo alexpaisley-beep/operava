@@ -8,11 +8,12 @@ know, deduplicating it, and moving it through the sales pipeline.
 The site deliberately knows **nothing** about Growth Engine's database. It sends a
 stable JSON payload to a URL. That is the whole coupling.
 
-> **Note on repository state.** At the time of writing, this repository contains
-> only a README — the Next.js marketing site described in planning is not present
-> here. This document therefore specifies the site side of the integration and
-> gives working code to drop in, rather than editing files that do not exist.
-> Growth Engine's receiving end is **built, tested and merged**.
+> **Status: implemented on both sides.** The forwarding is live in
+> `src/lib/leads.ts` (`deliverLead`), and Growth Engine's receiving end is built
+> and tested. This document is now the reference for the contract, not a
+> to-do list — an earlier revision was written while this repo still contained
+> only a README and described a forwarder to add. Nothing needs to be added; set
+> the two environment variables below and leads flow.
 
 ---
 
@@ -95,69 +96,29 @@ Two details that matter:
 
 ---
 
-## Drop-in forwarder
+## Where the forwarding lives
 
-Add to the site's lead handler, after the lead has been stored/emailed. Forwarding
-failures must **never** fail the visitor's submission — they already filled the
-form in; a webhook problem is ours, not theirs.
+`src/lib/leads.ts` → `deliverLead()`. Every form on the site and `POST /api/leads`
+funnel through that one function, so there is exactly **one** lead path and no
+duplicate forwarding.
 
-```ts
-// lib/forwardLeadToGrowthEngine.ts
-import crypto from 'node:crypto';
+It fans out to three channels, in order:
 
-/**
- * Forward a captured lead to Growth Engine.
- *
- * Fire-and-log: a webhook failure must not turn into a visible error for the
- * person who just filled in the form. Growth Engine's endpoint is idempotent, so
- * retrying a lead is always safe.
- */
-export async function forwardLeadToGrowthEngine(lead: Record<string, unknown>) {
-  const url = process.env.LEAD_WEBHOOK_URL;
-  const secret = process.env.LEAD_WEBHOOK_SECRET;
-  if (!url || !secret) return { forwarded: false, reason: 'not configured' };
+1. **Structured log** — always on, always first. With zero configuration every
+   lead is still recoverable from the platform log stream as a single JSON line
+   prefixed `operava.lead`.
+2. **Webhook** (Growth Engine) — HMAC-signed, see below.
+3. **Email** via Resend, when `RESEND_API_KEY` / `LEAD_NOTIFY_EMAIL` /
+   `LEAD_FROM_EMAIL` are all set.
 
-  // Serialise ONCE and sign exactly these bytes.
-  const body = JSON.stringify(lead);
-  const timestamp = String(Date.now());
-  const signature =
-    'sha256=' +
-    crypto.createHmac('sha256', secret).update(`${timestamp}.`).update(Buffer.from(body, 'utf8')).digest('hex');
+Nothing in it throws. A Growth Engine outage produces `failed: ["webhook:network"]`
+in the result and an `operava.lead.delivery_failed` log line — the visitor still
+sees success, and the lead still exists in the log and the notification email. A
+delivery problem is ours, not theirs.
 
-  try {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Operava-Signature': signature,
-        'X-Operava-Timestamp': timestamp,
-      },
-      body,
-      // Growth Engine answers in milliseconds; don't hold the form response.
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) {
-      console.error('[lead-webhook] non-2xx', res.status, await res.text().catch(() => ''));
-      return { forwarded: false, status: res.status };
-    }
-    return { forwarded: true, ...(await res.json().catch(() => ({}))) };
-  } catch (err) {
-    console.error('[lead-webhook] failed', err);
-    return { forwarded: false, reason: 'network' };
-  }
-}
-```
-
-Call it from `POST /api/leads`:
-
-```ts
-const lead = normalizeLead(await req.json());
-await storeLeadAsToday(lead);          // existing behaviour, unchanged
-void forwardLeadToGrowthEngine(lead);  // additive; never blocks the response
-return Response.json({ ok: true });
-```
-
----
+The body is serialised **once** and both signed and sent, because `JSON.stringify`
+does not round-trip byte-for-byte (key order, unicode escapes) and signing a
+re-serialised object would drift from the payload intermittently.
 
 ## Payload
 
@@ -166,43 +127,64 @@ Every field is optional except that **one of** company/name must be present
 some way to reply; anything less is not a lead.
 
 ```jsonc
+// The EXACT shape src/lib/leads.ts sends. This is the contract.
 {
-  "id": "lead_abc123",                    // any stable id — used for idempotency
-  "company": "Evergreen Grounds Co",
+  "id": "a1b2c3d4-…",                  // crypto.randomUUID() — the idempotency key
+  "source": "software_request",        // or "discovery_call"
+  "page": "/request-software",
+  "cta": "Request a build",
+  "submittedAt": "2026-08-17T14:00:00.000Z",
+
   "name": "John Fields",
+  "business": "Evergreen Grounds Co",
   "email": "john@evergreengrounds.test",
   "phone": "608-555-0134",
   "website": "https://evergreengrounds.test",
-  "city": "Madison",
-  "state": "WI",
 
-  "companySize": "6 crews, about 26 people",
-  "serviceMix": "maintenance, install, irrigation, snow",
-  "serviceArea": "Dane County + surrounding",
+  "companySize": "26–50 people",
+  "crewCount": "6–10 crews",
+
   "currentSoftware": "Jobber and QuickBooks",
+  "integrations": "QuickBooks, Stripe",
 
-  "problem": "Our snow billing lives in spreadsheets and nothing talks to QuickBooks.",
+  "painPoints": "Snow billing lives in spreadsheets and nothing talks to QuickBooks.",
   "desiredSystem": "One system that handles recurring routes and snow events",
-  "desiredOutcome": "Stop re-keying every push",
 
-  "budget": "$10k-15k",
-  "timeline": "before next winter",
-  "urgency": "planning now",
+  "budget": "$10k–$25k",
+  "timeline": "Next 1–3 months",
+  "preferredContact": "Phone call",
+  "notes": "Busy until October",
 
-  "sourceUrl": "https://operava.com/custom-software",
-  "cta": "Request a build",
-  "submittedAt": "2026-08-17T14:00:00.000Z"
+  "meta": { "referrer": "https://www.google.com/", "userAgent": "…", "flags": [] }
 }
 ```
 
-**Field names are tolerant.** `company`/`companyName`/`business`/`businessName`
-are equivalent, as are `problem`/`message`/`painPoint`/`details` and
-`sourceUrl`/`pageUrl`/`page`. This is deliberate: losing a real enquiry because
-the site renamed a field is far worse than an imperfect mapping, and the complete
-raw body is stored on every request either way.
+### How Growth Engine maps it
 
-`problem` is the single most valuable field. A submission with a described
-problem is a sales conversation; one without is a name in a list.
+| Site field | Growth Engine field |
+|---|---|
+| `business` (or `company`/`companyName`) | `companyName` |
+| `name` | `contactName` |
+| `painPoints` (or `problem`/`pain`/`message`) | `problem` |
+| `companySize` + `crewCount` | `companySize`, joined |
+| `integrations` | `operationalNotes` |
+| `preferredContact`, `meta.referrer` | appended to `notes` |
+| `page` (or `sourceUrl`/`pageUrl`) | `sourceUrl` |
+| `cta` | `sourceCta` |
+| `budget` | `budgetRange` |
+| `id` | idempotency key |
+| everything, verbatim | `rawSubmission` |
+
+**`painPoints` is the single most valuable field.** A submission with a described
+problem is a sales conversation; one without is a name in a list. Growth Engine's
+mapper originally aliased only the singular `painPoint`, which meant this arrived
+`null` on every website lead — that is fixed, and pinned by a test that uses this
+exact payload as its fixture.
+
+Field names are matched **tolerantly** on purpose: losing a real enquiry because
+the site renamed a field is far worse than an imperfect mapping, and the complete
+raw body is stored either way. If you do rename one, the contract test in Growth
+Engine (`tests/integration/operavaLeadIngestion.test.js`) is where it will show up.
 
 ---
 

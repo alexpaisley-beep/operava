@@ -325,10 +325,13 @@ export default function Home() {
           ))}
         </div>
 
+        {/* Credibility, in the order this ICP actually weighs it: ran the
+            operation first, built the software second. */}
         <p className="mt-8 max-w-3xl text-[0.9375rem] leading-relaxed text-ink-3">
-          Operava is also the company behind Operon, a software platform built for home-service
-          operations. It is not what we are selling here — it is why we do not need to learn
-          this industry on your budget.
+          Alex ran a lawn care business before building software for the industry. Operava is
+          also the company behind Operon and CallPilot, platforms built for home-service
+          operations. None of that is what we are selling here — it is why we do not need to
+          learn this industry on your budget.
         </p>
       </Section>
 
