@@ -10,11 +10,17 @@
  *   2. Nothing here describes software that does not exist — and, just as
  *      importantly, nothing here describes shipped software as missing. An
  *      earlier version of this file called CallPilot "in development, not
- *      available" and listed "no built-in payment processing" as an Operon
- *      limitation. Both were false: CallPilot is live inside Operon with
- *      metered minutes, and Stripe runs across hundreds of files. Understating
- *      what we built is not modesty, it is an inaccurate claim that costs us
- *      the sale.
+ *      available" and listed "no built-in payment processing" as a limitation.
+ *      Both were false: CallPilot is live with metered minutes, and payment
+ *      processing runs across hundreds of files. Understating what we built is
+ *      not modesty, it is an inaccurate claim that costs us the sale.
+ *   2b. This page is EVIDENCE OF CAPABILITY, not a shop window for our other
+ *      products. Describe what we BUILT and what it PROVES — never what a
+ *      reader should go and buy. No product pricing, no sign-up links, no
+ *      "available on the Pro plan". The moment a card reads like a pitch for
+ *      another product, it stops working as proof for this one. CallPilot in
+ *      particular is a separate product and must never be described as
+ *      included with, or part of, anything else.
  *   3. `integrations` lists what is genuinely wired up and running. Systems we
  *      can BUILD a connection to belong on /what-we-build, not here.
  *   4. No usage numbers, no revenue impact, no customer counts, no logos, no
@@ -69,9 +75,9 @@ export const builtSystems: BuiltSystem[] = [
     kind: "Product · Built by Operava",
     status: { label: "Live", tone: "live" },
     summary:
-      "A full operating system for home-service companies — customers, estimates, scheduling, crews, invoicing, payments, payroll and a customer portal, in one system rather than six.",
+      "A complete operating platform for home-service companies, designed and built here end to end — and still run here. It is not what Operava sells you; it is the evidence that we can build one.",
     problem:
-      'An established crew usually runs the business across a quoting tool, a shared calendar, an invoicing app, a payroll provider and an inbox. None of them know about each other, so the same job gets typed in four times, and the office cannot answer "where does this customer stand" without opening five tabs.',
+      "The hard part was never any single screen. It was making customers, estimates, scheduling, crews, invoicing, payments and payroll behave as one system instead of six that happen to share a login — which is the same problem every custom build for an established operator runs into.",
     built: [
       "Customer records with properties, contacts, service history and preferences",
       "Estimates and multi-option proposals, with digital signature and acceptance",
@@ -94,8 +100,8 @@ export const builtSystems: BuiltSystem[] = [
         body: "Recurring service plans across crews and service types, where moving one visit does not corrupt the rest of the season. This is the part most scheduling tools get wrong and the part that costs an operator real money.",
       },
       {
-        title: "A portal that answers the phone for you",
-        body: "Customers see their upcoming service, approve estimates, sign contracts, pay invoices and ask questions themselves. Every one of those is a call the office does not have to take.",
+        title: "A customer portal wired to the back office",
+        body: "Customers see upcoming service, approve estimates, sign contracts, pay invoices and ask questions — reading and writing to the same records the office works from, not a separate copy that drifts.",
       },
     ],
     integrations: ["Stripe", "Twilio", "Google", "Apple and Google app stores"],
@@ -114,9 +120,9 @@ export const builtSystems: BuiltSystem[] = [
     id: "callpilot",
     name: "CallPilot",
     kind: "Product · Built by Operava",
-    status: { label: "Live in Operon", tone: "live" },
+    status: { label: "Live", tone: "live" },
     summary:
-      "An AI receptionist that answers the phone when nobody can, takes the call properly, and books it straight into the schedule. Live inside Operon, on real phone numbers, with metered call minutes.",
+      "An AI receptionist that answers the phone when nobody can, takes the call properly, and books it straight into a schedule. A separate product in its own right, running on real phone numbers with metered call minutes.",
     problem:
       "A missed call during the working day is usually a lost job, because the caller rings the next company on the list rather than leaving a voicemail. Crews cannot answer from a mower and the office cannot answer while quoting.",
     built: [
@@ -142,7 +148,7 @@ export const builtSystems: BuiltSystem[] = [
         body: 'The owner chooses what the agent may do in plain language — "give prices over the phone", "book recurring work" — and turning one off genuinely removes those abilities from the call rather than just unticking a box. A setting that looks real and does nothing is worse than no setting.',
       },
     ],
-    integrations: ["Twilio", "Operon scheduling, customers and billing"],
+    integrations: ["Twilio", "Scheduling, customer and billing systems"],
     handles: [
       "Live inbound phone calls",
       "Appointment booking and rescheduling",

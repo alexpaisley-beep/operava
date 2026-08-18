@@ -332,11 +332,10 @@ export default function Home() {
         {/* Credibility, in the order this ICP actually weighs it: ran the
             operation first, built the software second. */}
         <p className="mt-8 max-w-3xl text-[0.9375rem] leading-relaxed text-ink-3">
-          Alex ran a lawn care business before building software for the industry. Operava is
-          also the company behind Operon — a full operating platform for home-service companies,
-          with payments, payroll and a customer portal — and CallPilot, the AI receptionist
-          running inside it. None of that is what we are selling here — it is why we do not need
-          to learn this industry on your budget.
+          Alex ran a lawn care business before building software for the industry. We have since
+          built and shipped scheduling, estimating, payments, payroll, customer portals and AI
+          phone answering for home-service operations. None of that is what we are selling you —
+          it is why we do not need to learn this industry on your budget.
         </p>
 
         {/* Quiet on purpose: the people who want evidence go looking for it,

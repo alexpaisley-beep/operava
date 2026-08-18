@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "The software Operava has actually built and still runs — Operon, CallPilot and Growth Engine. What each one does, what it handles, and what it proves. No invented case studies.",
+    "The software Operava has actually built and still runs. What each system does, what it handles, and what it proves about the work we can do for you. No invented case studies.",
   alternates: { canonical: "/work" },
   openGraph: {
     title: "Work — Operava",
