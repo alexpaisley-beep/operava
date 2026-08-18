@@ -101,10 +101,11 @@ export default function AboutPage() {
               </p>
               <p className="mt-5 text-[1.0625rem] leading-relaxed text-ink-2">
                 Operava is also the company behind <strong className="text-ink">Operon</strong>,
-                a software platform built for home-service operations, and{" "}
-                <strong className="text-ink">CallPilot</strong>. Building and running those is
-                where the scheduling, estimating, payments and crew workflow engineering
-                experience comes from.
+                a full operating platform for home-service companies, and{" "}
+                <strong className="text-ink">CallPilot</strong>, the AI receptionist that runs
+                inside it and books calls straight into the schedule. Building and running those
+                is where the scheduling, estimating, payments, payroll and crew workflow
+                engineering experience comes from.
               </p>
               <p className="mt-5 text-[1.0625rem] leading-relaxed text-ink-2">
                 It is not what we are selling you. Custom software is. Operon is simply the

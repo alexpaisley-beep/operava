@@ -97,10 +97,21 @@ Gate it with `LEAD_API_TOKEN` before pointing something real at it.
 `/book` qualifies first (company, operation, scope), then hands off to
 scheduling. **No fake availability is ever rendered.**
 
-- With `NEXT_PUBLIC_BOOKING_URL` set (Cal.com, Calendly, Google), the
-  confirmation page embeds a real time picker.
-- Without it, the page says a human will follow up using the contact method the
-  prospect chose — which is what actually happens.
+The scheduler defaults to the live Operava Discovery Call:
+
+```
+https://calendly.com/alexpaisley-operavallc/30min
+```
+
+- That default is in `src/lib/site.ts`, so the picker works on a fresh deploy
+  with no environment configuration. It used to default to `""`, which meant any
+  deploy missing `NEXT_PUBLIC_BOOKING_URL` silently degraded every booking CTA
+  on the site into "we'll email you" — the flow still completed, nobody could
+  pick a time, and nothing said so.
+- `NEXT_PUBLIC_BOOKING_URL` still overrides it, for a staging deploy that should
+  not book real calls.
+- If the override is ever set to an empty string, the confirmation page falls
+  back to promising a human follow-up rather than rendering fake availability.
 
 ## Anti-spam
 

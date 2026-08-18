@@ -64,6 +64,7 @@ const included = [
   "Monitoring and backups",
   "Security patching and dependency updates",
   "Bug fixes on delivered functionality",
+  "Integration upkeep when a service you depend on changes",
   "Support for your team when something looks wrong",
   "Small adjustments as the business changes",
 ];
@@ -238,6 +239,21 @@ export default function PricingPage() {
               whole point of writing scope down.
             </p>
           </div>
+        </div>
+
+        {/* The specific thing an operator is buying with the monthly fee is not
+            a list of nouns — it is knowing what happens on a bad day. */}
+        <div className="mt-14 rounded-lg border border-line bg-surface p-7 lg:p-9">
+          <h3 className="t-h3 max-w-3xl text-ink">
+            When something breaks, we investigate it, fix it, add protection against it
+            happening again, and tell you exactly what happened.
+          </h3>
+          <p className="mt-5 max-w-3xl text-[0.9375rem] leading-relaxed text-ink-2">
+            That last part is the one most people have never been given. You should not have to
+            guess whether a problem was understood or just made to go away, and you should not
+            have to chase an answer from someone who has moved on to their next client. Software
+            you cannot get support for is a liability no matter how good it was on launch day.
+          </p>
         </div>
       </Section>
 
