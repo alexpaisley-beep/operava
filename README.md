@@ -41,6 +41,9 @@ src/
   app/
     page.tsx                       Home
     what-we-build/                 Capabilities, in depth
+    work/                          Proof — what we have built, and an honest
+                                   empty client portfolio. See content/work.ts
+                                   before editing: it carries accuracy rules.
     process/                       Discovery → Scope → Build → Launch
     pricing/                       Pricing model + commercial structure
     about/                         Company
