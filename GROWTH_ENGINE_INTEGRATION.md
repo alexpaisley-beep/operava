@@ -1,8 +1,8 @@
 # Operava site → Growth Engine lead integration
 
 This document is the **contract** between the Operava marketing site and Growth
-Engine. The site captures a lead; Growth Engine turns it into a *software
-request* and owns everything after that — matching it to a company we may already
+Engine. The site captures a lead; Growth Engine turns it into a _software
+request_ and owns everything after that — matching it to a company we may already
 know, deduplicating it, and moving it through the sales pipeline.
 
 The site deliberately knows **nothing** about Growth Engine's database. It sends a
@@ -45,15 +45,15 @@ POST /api/leads                     (this site — already the normalized Lead s
 
 ### On the Operava site (Vercel)
 
-| Variable | Value | Notes |
-|---|---|---|
-| `LEAD_WEBHOOK_URL` | `https://<growth-engine-host>/api/operava/leads` | The Growth Engine ingestion endpoint. |
-| `LEAD_WEBHOOK_SECRET` | a long random string | **Must be byte-identical** to `OPERAVA_WEBHOOK_SECRET` in Growth Engine. |
+| Variable              | Value                                            | Notes                                                                    |
+| --------------------- | ------------------------------------------------ | ------------------------------------------------------------------------ |
+| `LEAD_WEBHOOK_URL`    | `https://<growth-engine-host>/api/operava/leads` | The Growth Engine ingestion endpoint.                                    |
+| `LEAD_WEBHOOK_SECRET` | a long random string                             | **Must be byte-identical** to `OPERAVA_WEBHOOK_SECRET` in Growth Engine. |
 
 ### On Growth Engine (Railway)
 
-| Variable | Value |
-|---|---|
+| Variable                 | Value                       |
+| ------------------------ | --------------------------- |
 | `OPERAVA_WEBHOOK_SECRET` | the same long random string |
 
 Generate one with:
@@ -74,9 +74,9 @@ HMAC-SHA256 over the **raw request body**, with a timestamp to bound replay.
 
 Two headers:
 
-| Header | Value |
-|---|---|
-| `X-Operava-Signature` | `sha256=<hex digest>` |
+| Header                | Value                                     |
+| --------------------- | ----------------------------------------- |
+| `X-Operava-Signature` | `sha256=<hex digest>`                     |
 | `X-Operava-Timestamp` | `Date.now()` as a string (ms since epoch) |
 
 The signed message is `` `${timestamp}.` `` followed by the raw body bytes:
@@ -90,7 +90,7 @@ Two details that matter:
 - **Sign the raw body string, not a re-serialised object.** `JSON.stringify` does
   not round-trip byte-for-byte (key order, unicode escapes), so signing a parsed
   object produces signatures that fail intermittently for reasons nobody can
-  reproduce. Build the body string once, sign *that*, send *that*.
+  reproduce. Build the body string once, sign _that_, send _that_.
 - **Requests older than 5 minutes are rejected.** A captured request cannot be
   replayed later.
 
@@ -129,8 +129,8 @@ some way to reply; anything less is not a lead.
 ```jsonc
 // The EXACT shape src/lib/leads.ts sends. This is the contract.
 {
-  "id": "a1b2c3d4-…",                  // crypto.randomUUID() — the idempotency key
-  "source": "software_request",        // or "discovery_call"
+  "id": "a1b2c3d4-…", // crypto.randomUUID() — the idempotency key
+  "source": "software_request", // or "discovery_call"
   "page": "/request-software",
   "cta": "Request a build",
   "submittedAt": "2026-08-17T14:00:00.000Z",
@@ -155,25 +155,25 @@ some way to reply; anything less is not a lead.
   "preferredContact": "Phone call",
   "notes": "Busy until October",
 
-  "meta": { "referrer": "https://www.google.com/", "userAgent": "…", "flags": [] }
+  "meta": { "referrer": "https://www.google.com/", "userAgent": "…", "flags": [] },
 }
 ```
 
 ### How Growth Engine maps it
 
-| Site field | Growth Engine field |
-|---|---|
-| `business` (or `company`/`companyName`) | `companyName` |
-| `name` | `contactName` |
-| `painPoints` (or `problem`/`pain`/`message`) | `problem` |
-| `companySize` + `crewCount` | `companySize`, joined |
-| `integrations` | `operationalNotes` |
-| `preferredContact`, `meta.referrer` | appended to `notes` |
-| `page` (or `sourceUrl`/`pageUrl`) | `sourceUrl` |
-| `cta` | `sourceCta` |
-| `budget` | `budgetRange` |
-| `id` | idempotency key |
-| everything, verbatim | `rawSubmission` |
+| Site field                                   | Growth Engine field   |
+| -------------------------------------------- | --------------------- |
+| `business` (or `company`/`companyName`)      | `companyName`         |
+| `name`                                       | `contactName`         |
+| `painPoints` (or `problem`/`pain`/`message`) | `problem`             |
+| `companySize` + `crewCount`                  | `companySize`, joined |
+| `integrations`                               | `operationalNotes`    |
+| `preferredContact`, `meta.referrer`          | appended to `notes`   |
+| `page` (or `sourceUrl`/`pageUrl`)            | `sourceUrl`           |
+| `cta`                                        | `sourceCta`           |
+| `budget`                                     | `budgetRange`         |
+| `id`                                         | idempotency key       |
+| everything, verbatim                         | `rawSubmission`       |
 
 **`painPoints` is the single most valuable field.** A submission with a described
 problem is a sales conversation; one without is a name in a list. Growth Engine's
@@ -190,15 +190,15 @@ Engine (`tests/integration/operavaLeadIngestion.test.js`) is where it will show 
 
 ## Responses
 
-| Status | Meaning | Should the site retry? |
-|---|---|---|
-| `202` | Accepted. `{ ok, duplicate, softwareRequestId, warnings }` | No |
-| `401` | Signature/timestamp rejected | No — fix the secret |
-| `422` | Payload has no usable identity | No — it will never succeed |
-| `503` | `OPERAVA_WEBHOOK_SECRET` not set on Growth Engine | Yes, later |
-| `5xx` | Unexpected | Yes, with backoff |
+| Status | Meaning                                                    | Should the site retry?     |
+| ------ | ---------------------------------------------------------- | -------------------------- |
+| `202`  | Accepted. `{ ok, duplicate, softwareRequestId, warnings }` | No                         |
+| `401`  | Signature/timestamp rejected                               | No — fix the secret        |
+| `422`  | Payload has no usable identity                             | No — it will never succeed |
+| `503`  | `OPERAVA_WEBHOOK_SECRET` not set on Growth Engine          | Yes, later                 |
+| `5xx`  | Unexpected                                                 | Yes, with backoff          |
 
-A **duplicate delivery also returns 202** with `duplicate: true` and the *same*
+A **duplicate delivery also returns 202** with `duplicate: true` and the _same_
 `softwareRequestId`. Retry freely — it cannot create a second request, and it will
 not overwrite work already done on the first.
 
