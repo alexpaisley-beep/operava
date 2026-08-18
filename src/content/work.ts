@@ -14,7 +14,10 @@
  *      running, verified against the source, not what we could plausibly build.
  *   4. No usage numbers, no revenue impact, no customer counts, no logos, no
  *      quotes. We do not have permission to publish any of those, and inventing
- *      one is unrecoverable.
+ *      one is unrecoverable. This includes the SOFT forms, which are the ones
+ *      that actually slip through: "real billing", "people pay for it",
+ *      "trusted by operators" all assert a customer base without naming a
+ *      number. Describe the software, not its imagined adoption.
  *
  * If you are adding an entry: it ships when it ships, not when it is planned.
  */
@@ -55,7 +58,7 @@ export const builtSystems: BuiltSystem[] = [
     kind: "Product · Built by Operava",
     status: { label: "Live", tone: "live" },
     summary:
-      "Operating software for home-service companies — estimates, scheduling, invoicing and customer records in one place, sold as a product with real billing.",
+      "Operating software for home-service companies — estimates, scheduling, invoicing and customer records in one place. A product with published pricing, not a one-off build.",
     problem:
       "An owner-operated crew typically runs the business across a quoting tool, a shared calendar, an invoicing app and an inbox. None of them know about each other, so the same job gets typed in four times and a lead can disappear in the gap between any two of them.",
     built: [
@@ -82,7 +85,7 @@ export const builtSystems: BuiltSystem[] = [
       "No built-in payment processing yet",
     ],
     proves:
-      "We have designed, shipped and maintained the full lead-to-invoice path for this industry, and run it as a product other people pay for — not as a demo, and not as a single project that was handed over and forgotten.",
+      "We have designed, shipped and maintained the full lead-to-invoice path for this industry, as a product we still run — not as a demo, and not as a single project that was handed over and forgotten.",
   },
   {
     id: "growth-engine",
@@ -102,7 +105,7 @@ export const builtSystems: BuiltSystem[] = [
       "Opt-out and suppression that cascade across every channel at once",
       "An operator console for reviewing, approving and holding what goes out",
       "Deliverability monitoring — bounces, complaints, domain authentication",
-      "Software request intake — the form on this site posts into it",
+      "Software request intake — the receiving end of the request form on this site",
     ],
     workflows: [
       {
@@ -115,7 +118,7 @@ export const builtSystems: BuiltSystem[] = [
       },
       {
         title: "Signed, idempotent request intake",
-        body: "Requests from this website arrive HMAC-signed over the raw body with a timestamp bound, are deduplicated on a stable key, and are matched against a company we may already know. A retried delivery cannot create a second request or overwrite work already done on the first.",
+        body: "Requests from this website are HMAC-signed over the raw body with a timestamp bound, deduplicated on a stable key, and matched against a company we may already know. A retried delivery cannot create a second request or overwrite work already done on the first.",
       },
     ],
     integrations: [
