@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { CtaBand } from "@/components/cta-band";
 import { CapabilityGrid } from "@/components/sections/capability-grid";
@@ -86,7 +87,7 @@ export default function WhatWeBuildPage() {
         <SectionHeading
           eyebrow="Platform experience"
           title="Systems we have already shipped."
-          lead="Production work, listed as capability rather than dressed up as client case studies. When we have client results worth publishing, they will appear here with the client's name on them."
+          lead="Production work, listed as capability rather than dressed up as client case studies. Client results, when we have them, are published on the Work page with the client's name on them."
         />
 
         <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
@@ -107,6 +108,23 @@ export default function WhatWeBuildPage() {
             </article>
           ))}
         </div>
+
+        {/* This list is capability in the abstract. The named systems behind it
+            live on /work, which is where anyone actually checking us out ends up. */}
+        <p className="mt-8">
+          <Link
+            href="/work"
+            className="group inline-flex items-center gap-2 text-[0.9375rem] text-navy-700 underline decoration-line-2 underline-offset-4 transition-colors hover:text-navy-800 hover:decoration-navy-600"
+          >
+            See the systems these came from
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+            >
+              &rarr;
+            </span>
+          </Link>
+        </p>
       </Section>
 
       <Section tone="surface">
