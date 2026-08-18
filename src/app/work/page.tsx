@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "The software Operava has actually built — Operon, Growth Engine and CallPilot — described honestly, including what is not finished. No invented case studies.",
+    "The software Operava has actually built and still runs — Operon, CallPilot and Growth Engine. What each one does, what it handles, and what it proves. No invented case studies.",
   alternates: { canonical: "/work" },
   openGraph: {
     title: "Work — Operava",
@@ -26,7 +26,6 @@ export const metadata: Metadata = {
 const statusTones = {
   live: "border-leaf-500/40 bg-leaf-50 text-leaf-700",
   internal: "border-navy-600/25 bg-navy-50 text-navy-800",
-  pending: "border-line-2 bg-muted text-ink-3",
 } as const;
 
 function StatusPill({ label, tone }: { label: string; tone: keyof typeof statusTones }) {
@@ -158,25 +157,22 @@ export default function WorkPage() {
                       </Detail>
                     ) : null}
 
-                    {system.technologies ? (
-                      <Detail label="Built with">
-                        <TagList items={system.technologies} />
-                      </Detail>
-                    ) : null}
-
-                    {system.limits ? (
-                      <Detail label="What it does not do">
+                    {/* "Built to handle", not "Built with". An owner deciding on
+                        a $6,000 build is asking whether this can carry their
+                        operation, not which framework it is written in. */}
+                    {system.handles ? (
+                      <Detail label="Built to handle">
                         <ul className="flex flex-col gap-2.5">
-                          {system.limits.map((limit) => (
+                          {system.handles.map((item) => (
                             <li
-                              key={limit}
+                              key={item}
                               className="flex gap-3 text-[0.9375rem] leading-relaxed text-ink-2"
                             >
                               <span
                                 aria-hidden="true"
-                                className="mt-[0.7em] inline-block h-px w-3 shrink-0 bg-ink-3"
+                                className="mt-[0.55em] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-leaf-500"
                               />
-                              {limit}
+                              {item}
                             </li>
                           ))}
                         </ul>

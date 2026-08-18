@@ -21,11 +21,21 @@ export const site = {
   description:
     "Custom operating software for established landscaping companies — CRM, scheduling, estimating, crew workflows and integrations built around how you actually run.",
   /**
-   * Scheduler URL (Cal.com / Calendly / Google). When set, the confirmation
-   * page offers a real time picker. When empty, we tell people we'll follow up
-   * by email instead of faking availability.
+   * Scheduler URL — the real Operava Discovery Call.
+   *
+   * This DEFAULTS to the live Calendly link rather than to "". An empty default
+   * meant that any deploy without NEXT_PUBLIC_BOOKING_URL set silently degraded
+   * every booking CTA on the site into "we'll email you to arrange a time" —
+   * the qualification flow still worked, but nobody could actually pick a slot,
+   * and nothing anywhere said so. A booking link is not optional configuration
+   * for a business whose primary CTA is "book a call".
+   *
+   * The env var still overrides, so a staging deploy can point somewhere else.
    */
-  bookingUrl: env("NEXT_PUBLIC_BOOKING_URL", ""),
+  bookingUrl: env(
+    "NEXT_PUBLIC_BOOKING_URL",
+    "https://calendly.com/alexpaisley-operavallc/30min",
+  ),
   startingPrice: "$6,000",
   supportPrice: "$200/month",
 } as const;

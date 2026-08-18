@@ -62,10 +62,11 @@ export const capabilities: Capability[] = [
       "A place customers can answer their own questions, so the office stops answering the same five calls.",
     points: [
       "Service history and upcoming visits",
-      "Estimates to review and approve",
+      "Estimates to review, approve and sign",
       "Invoices and online payment",
       "Service requests that land in your workflow, not an inbox",
       "Documents, photos and property details",
+      "Lives inside your existing website or alongside it — customers see one company, not two systems",
     ],
   },
   {
@@ -74,7 +75,11 @@ export const capabilities: Capability[] = [
     title: "Integrations",
     summary:
       "Keep the systems that already work. We connect them instead of replacing them for the sake of it.",
+    // Jobber leads deliberately. "We already run on Jobber" is the most common
+    // reason an established operator stops reading, and the answer is that they
+    // do not have to rip it out.
     points: [
+      "Jobber and the field tools your crews already know",
       "QuickBooks for accounting that stays reconciled",
       "Stripe for cards, ACH and stored payment methods",
       "Twilio for SMS, call routing and notifications",

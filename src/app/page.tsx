@@ -19,11 +19,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
+// "Connects" leads with Jobber deliberately. The most common objection from an
+// established operator is "we already run on Jobber and we are not ripping it
+// out", and the answer is that they do not have to. Naming it first answers the
+// objection before it is raised.
 const signals = [
   { label: "Built for", value: "Multi-crew operations" },
-  { label: "Connects", value: "QuickBooks, Stripe, Twilio" },
+  { label: "Connects", value: "Jobber, QuickBooks, Stripe, Twilio" },
   { label: "Scope", value: "Fixed price, defined upfront" },
-  { label: "After launch", value: "Hosting, maintenance, support" },
+  { label: "After launch", value: "We host, monitor and support it" },
 ];
 
 export default function Home() {
@@ -329,9 +333,10 @@ export default function Home() {
             operation first, built the software second. */}
         <p className="mt-8 max-w-3xl text-[0.9375rem] leading-relaxed text-ink-3">
           Alex ran a lawn care business before building software for the industry. Operava is
-          also the company behind Operon and CallPilot, platforms built for home-service
-          operations. None of that is what we are selling here — it is why we do not need to
-          learn this industry on your budget.
+          also the company behind Operon — a full operating platform for home-service companies,
+          with payments, payroll and a customer portal — and CallPilot, the AI receptionist
+          running inside it. None of that is what we are selling here — it is why we do not need
+          to learn this industry on your budget.
         </p>
 
         {/* Quiet on purpose: the people who want evidence go looking for it,

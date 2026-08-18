@@ -38,6 +38,10 @@ const boundaries = [
     title: "We don't ship and disappear",
     body: "Hosting, monitoring, fixes and support continue after launch. Software you cannot maintain is a liability.",
   },
+  {
+    title: "Your website can be part of this, if it helps",
+    body: "When the lead forms, estimate requests, booking and customer portal all feed the same system, it usually makes sense for us to host and maintain the site too. If your current site works and your web guy is good, keep them — this is an option, not a condition.",
+  },
 ];
 
 export default function WhatWeBuildPage() {
@@ -134,13 +138,24 @@ export default function WhatWeBuildPage() {
           lead="Scope discipline is the difference between a system that pays for itself and a project that quietly doubles."
         />
 
+        {/* An odd item count in a 2-up grid leaves a bare cell showing the
+            divider colour through the gap, so the last one spans the row. */}
         <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
-          {boundaries.map((item) => (
-            <div key={item.title} className="bg-surface p-6 lg:p-7">
+          {boundaries.map((item, index) => (
+            <div
+              key={item.title}
+              className={`bg-surface p-6 lg:p-7 ${
+                index === boundaries.length - 1 && boundaries.length % 2 === 1
+                  ? "sm:col-span-2"
+                  : ""
+              }`}
+            >
               <h3 className="text-[1.0625rem] font-semibold leading-snug tracking-[-0.015em] text-ink">
                 {item.title}
               </h3>
-              <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-ink-2">{item.body}</p>
+              <p className="mt-2.5 max-w-3xl text-[0.9375rem] leading-relaxed text-ink-2">
+                {item.body}
+              </p>
             </div>
           ))}
         </div>
