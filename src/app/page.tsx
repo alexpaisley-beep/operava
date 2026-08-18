@@ -333,6 +333,23 @@ export default function Home() {
           operations. None of that is what we are selling here — it is why we do not need to
           learn this industry on your budget.
         </p>
+
+        {/* Quiet on purpose: the people who want evidence go looking for it,
+            and the ones who don't should not have the page shouted at them. */}
+        <p className="mt-6">
+          <Link
+            href="/work"
+            className="group inline-flex items-center gap-2 text-[0.9375rem] text-navy-700 underline decoration-line-2 underline-offset-4 transition-colors hover:text-navy-800 hover:decoration-navy-600"
+          >
+            See what we&rsquo;ve built
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+            >
+              &rarr;
+            </span>
+          </Link>
+        </p>
       </Section>
 
       {/* ------------------------------------------------------------- Pricing */}

@@ -34,6 +34,9 @@ export type NavItem = { href: string; label: string };
 
 export const primaryNav: NavItem[] = [
   { href: "/what-we-build", label: "What We Build" },
+  // "Work" rather than "What We've Built": one character away from the item
+  // above it in the same nav is not a distinction anyone parses at a glance.
+  { href: "/work", label: "Work" },
   { href: "/process", label: "Process" },
   { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
@@ -54,7 +57,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     title: "Capabilities",
     items: [
       { href: "/what-we-build", label: "What we build" },
-      { href: "/what-we-build#systems", label: "Systems we've built" },
+      { href: "/work", label: "Work we've shipped" },
       { href: "/#faq", label: "Questions" },
       { href: "/privacy", label: "Privacy" },
     ],
