@@ -117,6 +117,53 @@ export const builtSystems: BuiltSystem[] = [
       "We have designed, shipped and maintained the entire operational path for this industry — quote to schedule to invoice to paid, with a customer portal and payroll attached. Not a dashboard on top of somebody else's system: the system itself.",
   },
   {
+    id: "travis",
+    name: "Travis AI",
+    kind: "Operations and intelligence layer · Built by Operava",
+    status: { label: "Live", tone: "live" },
+    summary:
+      "Not a chat window bolted onto a product. Travis answers from the live business, runs the same operations the screens run, and stops for a human before anything consequential. It works across Operon and Growth Engine — how the work gets done, and how it gets sold.",
+    problem:
+      "Most AI inside business software is a text box wired to a model that cannot see the company's data and cannot change anything, so it answers in generalities and every real action still gets done by hand on another screen. The conversation was never the hard part. Giving an assistant accurate business context, a real set of actions, and limits strict enough that an owner will let it act at all — that is the hard part.",
+    built: [
+      "Reads the live business before answering — the day's schedule, customers, open estimates, unpaid invoices, crews, leads, and the weather against the jobs that are booked",
+      "Calls the same operations the screens call: customers, jobs and scheduling, estimates and contracts, invoicing and payments, payroll and timesheets, equipment, reviews, website and marketing",
+      "Stages consequential actions as approval cards — sending, charging, refunding, deleting, anything in bulk — rather than executing them inline",
+      "Autonomy the owner sets per category of work: off, draft only, ask first, or go ahead",
+      "Realtime voice in the browser — the owner talking to their own system, running through the same tools and the same approval rules as the typed chat",
+      "Durable business memory: standing facts kept and versioned when they change, deliberately separate from the settings that already own a value",
+      "A daily brief covering where the business stands and the one action worth doing first",
+      "Scheduling help that reads the real calendar and proposes a placement, with the times computed rather than guessed",
+      "Lead intake that turns a loose message into a structured lead, and follow-up drafted for review",
+      "In Growth Engine: prospect discovery and scoring, outreach drafting, campaigns, reply sync, and sending that is gated behind approval",
+    ],
+    workflows: [
+      {
+        title: "Consequential actions stop at an approval card",
+        body: "Reading the business is free. Changing it is not. Sending an invoice, charging a card, deleting a customer or messaging a list all stop and wait as a card showing the exact action. Voice is held to the same rule, and the riskiest of them — money, legal, bulk sends — cannot be approved out loud at all, because a microphone hears the room as well as the owner.",
+      },
+      {
+        title: "One execution path, whichever way the owner is talking to it",
+        body: "Typed chat, voice and the proactive cards all run through the same tools, the same permission checks and the same approval engine. The voice layer owns the connection and nothing else. A second execution path is how a system ends up disagreeing with itself about what needs permission — usually discovered the first time something goes out that should not have.",
+      },
+      {
+        title: "Data out of the database is treated as data, not instructions",
+        body: "Customer notes, imported rows and inbound email bodies all reach the model as tool results, and every one of them arrived through a door we do not control — a public form, a spreadsheet, someone else's inbox. It is fenced off and marked untrusted, so text sitting in a lead form cannot talk the assistant into taking an action nobody asked for.",
+      },
+    ],
+    integrations: ["Operon", "Growth Engine", "Stripe", "Twilio", "Gmail", "Google Places"],
+    handles: [
+      "Live business context assembled per request, scoped to one company",
+      "Actions against real records, not a sandbox copy",
+      "Role, permission and approval checks before anything executes",
+      "Repeated and retried requests without doing the work twice",
+      "A log of what was asked, what ran and what it changed",
+      "Realtime voice alongside typed chat",
+    ],
+    proves:
+      "A chat window over a database is a weekend. The difficulty is everything around it — assembling accurate context on every request, permissions and approvals that hold when the model is wrong, execution that survives a retry, an audit trail, and untrusted record text kept well away from the instructions. That is the layer we built, into two systems we also built, and it is the part that decides whether an owner can let software act on their behalf.",
+  },
+  {
     id: "callpilot",
     name: "CallPilot",
     kind: "Product · Built by Operava",
