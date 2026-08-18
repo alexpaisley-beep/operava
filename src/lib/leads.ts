@@ -176,18 +176,41 @@ export async function deliverLead(lead: Lead): Promise<DeliveryResult> {
   console.log(`operava.lead ${JSON.stringify(lead)}`);
   delivered.push("log");
 
-  // 2. Generic webhook — the seam for Growth Engine / CRM / Zapier later.
+  // 2. Webhook — Growth Engine, or any CRM/Zapier endpoint pointed at the same URL.
+  //
+  // HMAC-SHA256 over the EXACT bytes we send, plus a timestamp. Two details, both
+  // of which were wrong before and would have rejected every single lead:
+  //
+  //   1. The header carries a SIGNATURE, not the secret. Sending the raw secret
+  //      means anyone who captures one request owns the credential forever, and
+  //      Growth Engine — which verifies an HMAC — rejected it outright.
+  //   2. `X-Operava-Timestamp` is required, and is part of the signed message.
+  //      Without it the receiver cannot bound replay, so it refuses the request.
+  //
+  // `body` is serialised ONCE and both signed and sent. Signing a re-serialised
+  // object cannot work: JSON.stringify does not round-trip byte-for-byte (key
+  // order, unicode escapes), so the digest would drift from the payload for
+  // reasons nobody can reproduce afterwards.
   const webhook = process.env.LEAD_WEBHOOK_URL;
   if (webhook) {
+    const body = JSON.stringify(lead);
     try {
       const headers: Record<string, string> = { "Content-Type": "application/json" };
-      if (process.env.LEAD_WEBHOOK_SECRET) {
-        headers["X-Operava-Signature"] = process.env.LEAD_WEBHOOK_SECRET;
+      const secret = process.env.LEAD_WEBHOOK_SECRET;
+      if (secret) {
+        const timestamp = String(Date.now());
+        const { createHmac } = await import("node:crypto");
+        const digest = createHmac("sha256", secret)
+          .update(`${timestamp}.`)
+          .update(Buffer.from(body, "utf8"))
+          .digest("hex");
+        headers["X-Operava-Signature"] = `sha256=${digest}`;
+        headers["X-Operava-Timestamp"] = timestamp;
       }
       const response = await fetch(webhook, {
         method: "POST",
         headers,
-        body: JSON.stringify(lead),
+        body,
         signal: AbortSignal.timeout(8000),
       });
       if (response.ok) delivered.push("webhook");

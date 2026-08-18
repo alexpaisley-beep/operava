@@ -189,7 +189,11 @@ const BOOKING_SCHEMA: Schema = {
   name: { label: "Your name", required: true, min: 2, max: 120 },
   business: { label: "Company name", required: true, min: 2, max: 160 },
   email: { label: "Email", required: true, kind: "email", max: 200 },
-  phone: { label: "Phone", required: true, kind: "phone", max: 40 },
+  // Optional on purpose. Email is already required and `preferredContact` asks
+  // how they want to be reached, so demanding a phone number as well is friction
+  // that buys nothing — and it was backwards: the BOOKING form, where we
+  // actually need to call, had it optional while this one insisted on it.
+  phone: { label: "Phone", kind: "phone", max: 40 },
   website: { label: "Company website", kind: "url", max: 300 },
   companySize: { label: "Company size", required: true, oneOf: COMPANY_SIZES },
   crewCount: { label: "Number of crews", required: true, oneOf: CREW_COUNTS },

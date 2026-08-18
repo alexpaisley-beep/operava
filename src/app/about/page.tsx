@@ -80,16 +80,31 @@ export default function AboutPage() {
       <Section tone="paper">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <SectionHeading eyebrow="Operon" title="Where the domain knowledge comes from." />
+            <SectionHeading
+              eyebrow="Background"
+              title="Where the domain knowledge comes from."
+            />
           </div>
 
           <div className="lg:col-span-7">
             <div className="rounded-lg border border-line bg-surface p-6 lg:p-8">
+              {/* The strongest honest credential for this ICP, and it was missing
+                  from the site entirely. A multi-crew owner cares far more that the
+                  person building their software has run crews than that he has
+                  shipped a SaaS product — it is the difference between "another
+                  developer" and "someone who has had this problem". */}
               <p className="text-[1.0625rem] leading-relaxed text-ink-2">
-                Operava is the company behind <strong className="text-ink">Operon</strong>, a
-                software platform built for home-service operations. Building and running it is
-                where the scheduling, estimating, payments and crew workflow experience comes
-                from.
+                Before writing software for this industry, Alex ran a lawn care business. The
+                scheduling, the estimating, the invoice that never went out, the crew that
+                showed up to the wrong address — that is where the interest in this problem
+                started.
+              </p>
+              <p className="mt-5 text-[1.0625rem] leading-relaxed text-ink-2">
+                Operava is also the company behind <strong className="text-ink">Operon</strong>,
+                a software platform built for home-service operations, and{" "}
+                <strong className="text-ink">CallPilot</strong>. Building and running those is
+                where the scheduling, estimating, payments and crew workflow engineering
+                experience comes from.
               </p>
               <p className="mt-5 text-[1.0625rem] leading-relaxed text-ink-2">
                 It is not what we are selling you. Custom software is. Operon is simply the
