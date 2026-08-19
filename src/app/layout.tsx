@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 import { site } from "@/lib/site";
 
 import "./globals.css";
@@ -125,19 +123,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
+      {/*
+        Document shell only. Header, footer and the skip link live in
+        app/(marketing)/layout.tsx; the portal supplies its own chrome. Keeping
+        them here would render the site nav above a signed-in client's project.
+      */}
       <body className="flex min-h-dvh flex-col antialiased">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-navy-700 focus:px-4 focus:py-2.5 focus:text-white"
-        >
-          Skip to content
-        </a>
-
-        <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter />
+        {children}
 
         <script
           type="application/ld+json"

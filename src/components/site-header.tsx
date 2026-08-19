@@ -80,6 +80,15 @@ export function SiteHeader() {
             </nav>
 
             <div className="flex items-center gap-2">
+              {/* Quiet on purpose. Existing clients know to look for it; a
+                  prospect should see one obvious next step, and that is the
+                  call — not a login for a portal they have no account on. */}
+              <Link
+                href="/portal/login"
+                className="hidden rounded-md px-3 py-2 text-[0.9rem] text-ink-2 transition-colors hover:bg-navy-50 hover:text-navy-800 lg:inline-flex"
+              >
+                Client login
+              </Link>
               <Cta
                 href="/book"
                 size="sm"
@@ -175,6 +184,12 @@ export function SiteHeader() {
             >
               Tell us what isn&rsquo;t working
             </Cta>
+            <Link
+              href="/portal/login"
+              className="pt-1 text-center text-[0.9375rem] text-navy-700 underline decoration-navy-200 underline-offset-4"
+            >
+              Client login
+            </Link>
             <p className="pt-2 text-center text-[0.875rem] text-ink-3">
               Custom builds start at {site.startingPrice}.
             </p>

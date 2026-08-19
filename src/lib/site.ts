@@ -77,6 +77,10 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     items: [
       { href: "/book", label: "Book a discovery call" },
       { href: "/request-software", label: "Request custom software" },
+      // Existing clients only. Deliberately in the footer rather than the main
+      // nav: a prospect scanning the header should see one next step, not a
+      // login form for a portal they cannot get into.
+      { href: "/portal/login", label: "Client login" },
     ],
   },
 ];

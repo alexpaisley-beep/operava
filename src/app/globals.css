@@ -32,6 +32,17 @@
   --color-surface: #ffffff;
   --color-muted: #f4f7fa;
 
+  /* Attention, not alarm.
+     The portal needs a third state between "fine" and "broken": a blocker
+     waiting on the customer is not an error, and painting it danger-red
+     teaches people to ignore red. Desaturated amber so it sits with the navy
+     and leaf rather than shouting over them. Portal-only — the marketing site
+     has no use for it. */
+  --color-alert-700: #8a5a0b;
+  --color-alert-600: #b8790f;
+  --color-alert-500: #d99b1c;
+  --color-alert-50: #fdf6e7;
+
   --color-danger: #b4231e;
   --color-danger-bg: #fdf3f2;
   --color-danger-line: #f0c9c6;
