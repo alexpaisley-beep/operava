@@ -244,7 +244,11 @@ same id.
 
 The site's message is fixed and should not be softened into generic SaaS copy:
 
-- **Custom software for landscaping companies that have outgrown generic tools.**
+- **Software built around how your business actually works.** Custom software
+  and automation for contractors and service businesses — keep the software that
+  works, fix the workflows that don't.
+- Landscaping stays as **one representative market**, never as the whole market.
+  Construction and the specialty trades must feel clearly included.
 - Custom builds **starting at $6,000**.
 - Hosting, maintenance and support **from $200/month** — described as ongoing
   support, not as "a subscription".

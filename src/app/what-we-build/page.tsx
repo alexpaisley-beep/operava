@@ -11,12 +11,12 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "What We Build",
   description:
-    "Custom CRM, scheduling, estimating, customer portals, QuickBooks and Stripe integrations, automation and reporting, built around how your company operates.",
+    "Integrations between the systems you already run, automation for manual handoffs, field-to-office workflows, estimating and change orders, internal tools, job costing and AI where it removes real work.",
   alternates: { canonical: "/what-we-build" },
   openGraph: {
     title: "What We Build — Operava",
     description:
-      "The systems a growing landscaping company runs on, built around your workflows rather than a vendor's.",
+      "The parts of a contracting or service operation that generic software leaves to your staff.",
     url: `${site.url}/what-we-build`,
   },
 };
@@ -27,8 +27,8 @@ const boundaries = [
     body: "QuickBooks is good at accounting. We integrate with it so your books stay correct without anyone retyping invoices.",
   },
   {
-    title: "We don't replace payments that work",
-    body: "If Stripe is already processing your cards, it stays. We connect it to the rest of the system properly.",
+    title: "We don't replace the software your team already knows",
+    body: "If your field, service or project software is doing its job, it stays. Retraining a whole company is a cost, and it is rarely the thing that was hurting you.",
   },
   {
     title: "We don't build features to raise the invoice",
@@ -52,11 +52,11 @@ export default function WhatWeBuildPage() {
           <div className="max-w-3xl">
             <Eyebrow>Capabilities</Eyebrow>
             <h1 className="t-h1 mt-6 text-ink">
-              The systems a growing landscaping company actually runs on.
+              The parts of the operation your software leaves to your staff.
             </h1>
             <p className="t-lead mt-6 text-ink-2">
               This page is capability, not a menu. Most projects use two or three of these,
-              wired into the tools you already keep. Which ones are worth building is exactly
+              wired into the software you already keep. Which ones are worth building is exactly
               what discovery is for.
             </p>
           </div>
@@ -164,7 +164,7 @@ export default function WhatWeBuildPage() {
       <CtaBand
         location="what-we-build-footer"
         title="Which of these would actually move the needle for you?"
-        lead="That is the first question on the call. Bring the parts of your operation your software has never handled properly."
+        lead="That is the first question on the call. Bring one workflow your software has never handled properly and we will work backwards from there."
       />
     </>
   );

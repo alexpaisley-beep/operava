@@ -9,11 +9,16 @@ type Variant = "primary" | "secondary" | "ghost";
 type Size = "sm" | "md" | "lg";
 type Tone = "light" | "dark";
 
+// No `whitespace-nowrap` here on purpose. A CTA label that cannot wrap sets a
+// min-content floor on every flex and grid track it sits in, so on a narrow
+// phone the button does not shrink — the page grows a horizontal scrollbar
+// instead. Wrapping to a second line is the correct failure mode, and
+// `text-center` already makes two lines look deliberate.
 const base =
   "group inline-flex items-center justify-center gap-2 rounded-md font-medium " +
   "transition-[background-color,border-color,color,transform] duration-200 ease-out " +
   "active:translate-y-px disabled:cursor-not-allowed disabled:opacity-60 " +
-  "whitespace-nowrap text-center";
+  "text-center";
 
 const sizes: Record<Size, string> = {
   sm: "px-4 py-2 text-[0.875rem]",

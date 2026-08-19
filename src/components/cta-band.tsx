@@ -5,8 +5,8 @@ import { site } from "@/lib/site";
  * The closing ask. Appears once per page, always pointed at a conversation.
  */
 export function CtaBand({
-  title = "Tell us what your current software can't do.",
-  lead = "Bring the workarounds, the spreadsheets, and the parts of the job your system has never handled properly. That is the conversation.",
+  title = "Tell us what your team still does manually.",
+  lead = "One workflow is enough to start: the handoff that gets missed, the spreadsheet holding a process together, the information somebody retypes every week. That is the conversation — not a software project you have to commit to today.",
   location,
 }: {
   title?: string;
@@ -32,9 +32,9 @@ export function CtaBand({
           <h2 className="t-h2 text-white">{title}</h2>
           <p className="t-lead mt-5 max-w-2xl text-navy-100">{lead}</p>
 
-          <div className="mt-9 flex w-full flex-col gap-3 xs:w-auto xs:flex-row xs:justify-center">
+          <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:justify-center">
             <Cta href="/book" size="lg" tone="dark" location={location}>
-              Book a Discovery Call
+              Walk us through a workflow
             </Cta>
             <Cta
               href="/request-software"
@@ -43,12 +43,12 @@ export function CtaBand({
               tone="dark"
               location={location}
             >
-              Request Custom Software
+              Tell us what isn&rsquo;t working
             </Cta>
           </div>
 
           <p className="mt-7 t-mono-sm text-navy-200">
-            Custom builds start at {site.startingPrice}. No obligation on the call.
+            Thirty minutes, no obligation. Custom builds start at {site.startingPrice}.
           </p>
         </div>
       </div>

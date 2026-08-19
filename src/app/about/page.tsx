@@ -7,20 +7,20 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Operava LLC builds custom operating software for businesses whose workflows generic products handle badly — home-service domain experience, production SaaS development, and integration-heavy systems.",
+    "Operava LLC builds custom software and automation for contractors and service businesses — service-operation domain experience, production software development, and integration-heavy systems.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About — Operava",
     description:
-      "Operava LLC builds software for businesses with workflows that generic software fails to handle cleanly.",
+      "Operava LLC builds software for service businesses with workflows that generic products fail to handle cleanly.",
     url: `${site.url}/about`,
   },
 };
 
 const strengths = [
   {
-    title: "Home-service domain experience",
-    body: "Crews, recurring work, routes, estimating rules, dispatch, the office in the middle of all of it. We are not learning how service businesses run while you pay for it.",
+    title: "Service-operation domain experience",
+    body: "Crews and techs in the field, recurring and project work, estimating rules, dispatch, the office in the middle of all of it. We are not learning how this kind of business runs while you pay for it.",
   },
   {
     title: "Production SaaS development",
@@ -44,13 +44,13 @@ export default function AboutPage() {
           <div className="max-w-3xl">
             <Eyebrow>About</Eyebrow>
             <h1 className="t-h1 mt-6 text-ink">
-              {site.legalName} builds software for businesses that generic products stopped
-              fitting.
+              {site.legalName} exists because good software still leaves people doing the work
+              by hand.
             </h1>
             <p className="t-lead mt-6 text-ink-2">
-              Most companies do not need custom software. The ones that do have usually reached
-              a specific point: the operation has become specific enough that off-the-shelf
-              tools cost more in workarounds than they save in licence fees.
+              Generic products handle about 80% of an established operation. Employees handle
+              the other 20% — retyping, chasing, reconciling, remembering. That gap is what we
+              build for, and most companies do not need us until it gets expensive.
             </p>
           </div>
         </div>
@@ -82,37 +82,46 @@ export default function AboutPage() {
           <div className="lg:col-span-5">
             <SectionHeading
               eyebrow="Background"
-              title="Where the domain knowledge comes from."
+              title="Where this comes from, and what it does not include."
             />
           </div>
 
           <div className="lg:col-span-7">
             <div className="rounded-lg border border-line bg-surface p-6 lg:p-8">
               {/* The strongest honest credential for this ICP, and it was missing
-                  from the site entirely. A multi-crew owner cares far more that the
-                  person building their software has run crews than that he has
+                  from the site entirely. An owner cares far more that the person
+                  building their software has run an operation than that he has
                   shipped a SaaS product — it is the difference between "another
-                  developer" and "someone who has had this problem". */}
+                  developer" and "someone who has had this problem".
+
+                  The second paragraph is load-bearing in the other direction:
+                  claiming tenure in trades we have not worked in would be the
+                  fastest way to lose a contractor on the first call. Saying so
+                  plainly costs nothing and buys the rest of the page. */}
               <p className="text-[1.0625rem] leading-relaxed text-ink-2">
-                Before writing software for this industry, Alex ran a lawn care business. The
+                Alex ran a home-service business before building software for one. The
                 scheduling, the estimating, the invoice that never went out, the crew that
                 showed up to the wrong address — that is where the interest in this problem
-                started.
+                started, and none of it turned out to be specific to that industry.
               </p>
               <p className="mt-5 text-[1.0625rem] leading-relaxed text-ink-2">
-                We have built and shipped platform software for this industry before —
+                We have not run an electrical contracting business or a concrete company, and we
+                are not going to pretend the trades are interchangeable. What is consistent is
+                the failure: work happens away from the office, several systems each hold part
+                of the truth, and people close the gap manually. That pattern is the same in a
+                mechanical contractor, a roofing company and a landscaping operation.
+              </p>
+              <p className="mt-5 text-[1.0625rem] leading-relaxed text-ink-2">
+                On the engineering side, we have built and shipped operating software before —
                 scheduling, estimating, invoicing, payments, payroll, customer portals and AI
-                phone answering, all of it running in production. That work is where the
-                engineering experience comes from.
-              </p>
-              <p className="mt-5 text-[1.0625rem] leading-relaxed text-ink-2">
-                None of it is what we are selling you. Custom software is. It is simply the
-                reason we can walk into a discovery call already understanding what a recurring
-                maintenance schedule does when a crew goes down, or why your estimator keeps
-                rebuilding quotes in a spreadsheet.
+                phone answering, all of it running in production. None of it is what we are
+                selling you. Custom software is. It is simply why we can come into a first call
+                already understanding what a recurring schedule does when a crew goes down, or
+                why your estimator keeps rebuilding quotes in a spreadsheet.
               </p>
               <p className="mt-5 text-[0.9375rem] leading-relaxed text-ink-3">
-                Practically: it means less of your budget goes to us learning your industry.
+                Practically: less of your budget goes to us learning how operations like yours
+                work.
               </p>
             </div>
           </div>
@@ -147,7 +156,7 @@ export default function AboutPage() {
             <dl className="mt-10 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-3">
               {[
                 { term: "Company", value: site.legalName },
-                { term: "Focus", value: "Custom operating software" },
+                { term: "Focus", value: "Custom software & automation" },
                 { term: "Projects from", value: site.startingPrice },
               ].map((row) => (
                 <div key={row.term} className="bg-surface p-5">
@@ -163,7 +172,7 @@ export default function AboutPage() {
       <CtaBand
         location="about-footer"
         title="The fastest way to find out if this is worth it."
-        lead="One call. We ask how your company runs, you find out whether custom software is the right answer, and nobody has spent anything."
+        lead="One call. You describe a workflow that is costing you time, we tell you whether software is the right answer, and nobody has spent anything."
       />
     </>
   );

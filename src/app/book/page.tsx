@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Book a Discovery Call",
   description:
-    "Book a discovery call with Operava. We map how your landscaping company operates and what is genuinely worth building. Custom projects start at $6,000.",
+    "Walk us through a workflow that is costing your business time. We map how your operation runs today and what is genuinely worth building. Custom projects start at $6,000.",
   alternates: { canonical: "/book" },
   openGraph: {
     title: "Book a Discovery Call — Operava",
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 };
 
 const covered = [
-  "How work moves from lead to paid today",
-  "Where your current stack stops fitting",
-  "The workarounds your team has quietly built",
+  "How work moves from request to paid today",
+  "Where your current systems stop talking to each other",
+  "The workarounds and spreadsheets your team has quietly built",
   "Which parts are worth building and which are not",
   "What a realistic scope and price look like",
 ];
@@ -39,7 +39,7 @@ export default function BookPage() {
           <div className="max-w-3xl">
             <Eyebrow>Discovery call</Eyebrow>
             <h1 className="t-h1 mt-6 text-ink">
-              Tell us how your company runs. We&rsquo;ll tell you what&rsquo;s worth building.
+              Walk us through a workflow. We&rsquo;ll tell you what&rsquo;s worth building.
             </h1>
             <p className="t-lead mt-6 text-ink-2">
               Thirty to forty-five minutes, no pitch deck. The questions below take a few

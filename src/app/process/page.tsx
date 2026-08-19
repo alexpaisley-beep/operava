@@ -8,12 +8,12 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Process",
   description:
-    "How Operava scopes and builds custom software: discovery of how you actually operate, a written scope at a fixed price, milestone builds, then launch and support.",
+    "How Operava scopes and builds custom software: you show us the workflow, we map the problem and price it, we build the missing piece, and your team stops babysitting it.",
   alternates: { canonical: "/process" },
   openGraph: {
     title: "Process — Operava",
     description:
-      "Discovery, scope, build, launch. You know what it costs and what is out of scope before development starts.",
+      "Show us the workflow, we map the problem, we build the missing piece, your team stops babysitting it.",
     url: `${site.url}/process`,
   },
 };
@@ -50,7 +50,8 @@ export default function ProcessPage() {
             <p className="t-lead mt-6 text-ink-2">
               Custom software goes wrong in predictable ways: unclear scope, a vendor who does
               not understand the business, and a price that moves after you have committed. The
-              process exists to remove all three.
+              process exists to remove all three. It starts with one workflow, not a plan to
+              replace everything you run.
             </p>
           </div>
         </div>
@@ -87,7 +88,7 @@ export default function ProcessPage() {
 
       <CtaBand
         location="process-footer"
-        title="Discovery is the whole first step. It costs you a call."
+        title="Step one is the whole first step. It costs you a call."
         lead="Bring how your company actually runs — including the parts nobody has written down. We will tell you what is worth building and what is not."
       />
     </>

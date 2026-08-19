@@ -1,22 +1,24 @@
 const stages = [
-  { name: "Lead intake", detail: "Phone, web, referral" },
+  { name: "Lead or request", detail: "Phone, web, referral" },
   { name: "Estimate", detail: "Your pricing rules" },
-  { name: "Schedule", detail: "Crews, routes, recurring" },
-  { name: "Field work", detail: "Crew view, job status" },
-  { name: "Invoice & payment", detail: "QuickBooks, Stripe" },
-  { name: "Reporting", detail: "The numbers you run on" },
+  { name: "Schedule", detail: "Crews, techs, recurring" },
+  { name: "Field work", detail: "Status, photos, notes" },
+  { name: "Change orders", detail: "Priced and approved" },
+  { name: "Invoice & job cost", detail: "QuickBooks, Stripe" },
 ];
 
 /**
- * The operational spine. Not decoration — it is the argument: one connected
- * path from lead to paid, which is exactly what a fragmented stack cannot do.
+ * The operational spine. Not decoration — it is the argument: information
+ * moving down this path without a person carrying it, which is exactly what a
+ * fragmented stack cannot do. Deliberately trade-neutral: an electrician, a
+ * roofer and a landscaper all recognise every row.
  */
 export function HeroSpine() {
   return (
     <div className="rounded-xl border border-line bg-surface p-5 shadow-[0_1px_2px_rgba(16,26,43,0.04),0_12px_32px_-16px_rgba(16,26,43,0.12)] sm:p-6">
       <div className="flex items-center justify-between gap-4 border-b border-line pb-4">
-        <p className="t-eyebrow text-ink-3">Lead to paid</p>
-        <p className="t-mono-sm text-ink-3">one system</p>
+        <p className="t-eyebrow text-ink-3">Request to paid</p>
+        <p className="t-mono-sm text-ink-3">no retyping</p>
       </div>
 
       <ol className="relative mt-5 flex flex-col gap-0">
@@ -39,8 +41,8 @@ export function HeroSpine() {
       </ol>
 
       <p className="mt-5 border-t border-line pt-4 text-[0.875rem] leading-relaxed text-ink-2">
-        Or just the two or three stages that are actually costing you money — connected properly
-        to the tools you keep.
+        Usually it is only the two or three handoffs actually costing you hours — connected
+        properly to the software you keep.
       </p>
     </div>
   );

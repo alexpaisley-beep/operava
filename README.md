@@ -1,12 +1,13 @@
 # Operava LLC — marketing site
 
-Marketing site for Operava LLC. The offer is **custom software development for
-established landscaping and home-service companies**, not an Operon
-subscription. Every page points at one of two conversions: booking a discovery
-call, or submitting a custom software request.
+Marketing site for Operava LLC. The offer is **custom software and automation
+for established home-service businesses, specialty contractors and other
+operationally complex service companies**, not an Operon subscription. Every
+page points at one of two conversions: booking a discovery call, or submitting a
+custom software request.
 
-- **Primary CTA** — Book a Discovery Call (`/book`)
-- **Secondary CTA** — Request Custom Software (`/request-software`)
+- **Primary CTA** — "Walk us through a workflow" (`/book`)
+- **Secondary CTA** — "Tell us what isn't working" (`/request-software`)
 - **Price anchor** — custom builds from $6,000; hosting, maintenance and support from $200/month
 
 ## Stack
