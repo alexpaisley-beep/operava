@@ -164,7 +164,7 @@ export function SiteHeader() {
 
           <div className="flex flex-col gap-3 py-7">
             <Cta href="/book" size="lg" location="mobile-menu" className="w-full">
-              Book a Discovery Call
+              Walk us through a workflow
             </Cta>
             <Cta
               href="/request-software"
@@ -173,7 +173,7 @@ export function SiteHeader() {
               location="mobile-menu"
               className="w-full"
             >
-              Request Custom Software
+              Tell us what isn&rsquo;t working
             </Cta>
             <p className="pt-2 text-center text-[0.875rem] text-ink-3">
               Custom builds start at {site.startingPrice}.

@@ -171,7 +171,7 @@ export const builtSystems: BuiltSystem[] = [
     summary:
       "An AI receptionist that answers the phone when nobody can, takes the call properly, and books it straight into a schedule. A separate product in its own right, running on real phone numbers with metered call minutes.",
     problem:
-      "A missed call during the working day is usually a lost job, because the caller rings the next company on the list rather than leaving a voicemail. Crews cannot answer from a mower and the office cannot answer while quoting.",
+      "A missed call during the working day is usually a lost job, because the caller rings the next company on the list rather than leaving a voicemail. Crews cannot answer from a jobsite and the office cannot answer while quoting.",
     built: [
       "Answers inbound calls on a real business number",
       "Takes the caller's name, number, service address and access notes — gate codes, dogs, where to park",

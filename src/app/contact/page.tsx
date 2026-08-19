@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Operava LLC about custom software for your landscaping company. Book a discovery call, send a software request, or email us directly.",
+    "Get in touch with Operava LLC about custom software and automation for your service business. Book a discovery call, send a software request, or email us directly.",
   alternates: { canonical: "/contact" },
   openGraph: {
     title: "Contact — Operava",
@@ -36,7 +36,7 @@ export default function ContactPage() {
           <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line lg:grid-cols-3">
             <div className="flex flex-col bg-surface p-7 lg:p-8">
               <p className="t-eyebrow text-ink-3">Best option</p>
-              <h2 className="t-h3 mt-4 text-ink">Book a discovery call</h2>
+              <h2 className="t-h3 mt-4 text-ink">Talk through a workflow</h2>
               <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-ink-2">
                 Thirty to forty-five minutes on how your company runs and where the software
                 stops fitting. A few questions first so the call starts at the real problem.
@@ -85,7 +85,7 @@ export default function ContactPage() {
               <h2 className="t-eyebrow text-ink-3">Company</h2>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink">{site.legalName}</p>
               <p className="mt-1 text-[0.9375rem] leading-relaxed text-ink-2">
-                Custom operating software for landscaping and home-service companies.
+                Custom software and automation for contractors and service businesses.
               </p>
             </div>
 
@@ -100,8 +100,8 @@ export default function ContactPage() {
             <div>
               <h2 className="t-eyebrow text-ink-3">Before you write</h2>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-2">
-                The most useful thing you can tell us is what your team does manually because
-                the software will not do it.
+                The most useful thing you can tell us is what your team still does manually
+                because the software will not do it.
               </p>
             </div>
           </div>

@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Request Custom Software",
   description:
-    "Tell us what is wasting time, breaking, or forcing your team into workarounds. Operava builds custom operating software for landscaping companies.",
+    "Tell us what is wasting time, breaking, or forcing your team into workarounds. Operava builds custom software and automation for contractors and service businesses.",
   alternates: { canonical: "/request-software" },
   openGraph: {
     title: "Request Custom Software — Operava",
@@ -18,11 +18,14 @@ export const metadata: Metadata = {
   },
 };
 
+// Deliberately drawn from different trades. A visitor should find at least one
+// of these recognisable without having to translate it out of somebody else's
+// industry first.
 const examples = [
-  "“Every quote gets rebuilt by hand because our pricing tiers don't fit the software.”",
-  "“We run six crews off a whiteboard because the scheduler can't handle recurring work.”",
-  "“The office retypes every job into QuickBooks. Twice, if anything changes.”",
-  "“Customers call to ask what they were billed for. Nobody can self-serve.”",
+  "“Every change order takes five manual steps, and one of them always gets missed.”",
+  "“Our techs text the office from the field. Someone retypes it into the schedule, then again into QuickBooks.”",
+  "“Estimating is fine until we win the job — then the PM rebuilds in a spreadsheet everything the estimator already knew.”",
+  "“Job costing takes two days a month because hours, materials and invoices live in three systems.”",
 ];
 
 export default function RequestSoftwarePage() {
@@ -36,9 +39,10 @@ export default function RequestSoftwarePage() {
               You don&rsquo;t need to know exactly what software you need.
             </h1>
             <p className="t-lead mt-6 text-ink-2">
-              Tell us what&rsquo;s wasting time, breaking, or forcing your team into
-              workarounds. We&rsquo;ll come back with a straight answer about whether something
-              is worth building — and what it would take.
+              Tell us what your team still does manually — the handoff that gets missed, the
+              spreadsheet holding a process together, the information somebody retypes every
+              week. We&rsquo;ll come back with a straight answer about whether something is
+              worth building, and what it would take.
             </p>
           </div>
         </div>

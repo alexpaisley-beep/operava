@@ -19,8 +19,8 @@ export function SiteFooter() {
               <Logo markClassName="h-8 w-8" />
             </Link>
             <p className="mt-5 text-[0.95rem] leading-relaxed text-navy-200">
-              Custom operating software for landscaping companies that have outgrown
-              off-the-shelf tools.
+              Custom software and automation for contractors and service businesses whose
+              workflows have outgrown off-the-shelf tools.
             </p>
             <a
               href={`mailto:${site.contactEmail}`}

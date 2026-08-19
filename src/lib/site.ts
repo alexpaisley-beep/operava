@@ -17,9 +17,9 @@ export const site = {
   /** Absolute site origin, no trailing slash. */
   url: rawUrl.replace(/\/+$/, ""),
   contactEmail: env("NEXT_PUBLIC_CONTACT_EMAIL", "alexpaisley@operavallc.com"),
-  tagline: "Custom software for landscaping companies that have outgrown generic tools.",
+  tagline: "Software built around how your business actually works.",
   description:
-    "Custom operating software for established landscaping companies — CRM, scheduling, estimating, crew workflows and integrations built around how you actually run.",
+    "Custom software and automation for contractors and service businesses — connecting the systems you already run and removing the manual work between them.",
   /**
    * Scheduler URL — the real Operava Discovery Call.
    *

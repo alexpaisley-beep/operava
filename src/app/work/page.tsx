@@ -89,7 +89,7 @@ export default function WorkPage() {
         <SectionHeading
           eyebrow="Built by Operava"
           title="Our own systems."
-          lead="Products and internal platforms we designed, built and still run. These are not client projects — they are the reason we do not need to learn this industry, or this kind of system, on your budget."
+          lead="Products and internal platforms we designed, built and still run. These are not client projects — they are the reason we do not need to learn this kind of operation, or this kind of system, on your budget."
         />
 
         <div className="mt-12 flex flex-col gap-px overflow-hidden rounded-lg border border-line bg-line">
@@ -250,24 +250,28 @@ export default function WorkPage() {
         />
         <div className="container-x section-y relative">
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <h2 className="t-h2 text-white">Join our expanding portfolio.</h2>
+            {/* Was "Join our expanding portfolio", which quietly asserts a client
+                base the section above says out loud we do not have yet. */}
+            <h2 className="t-h2 text-white">
+              Your team shouldn&rsquo;t have to work around the software.
+            </h2>
             <p className="t-lead mt-5 max-w-2xl text-navy-100">
-              Your business shouldn&rsquo;t have to work around software that wasn&rsquo;t built
-              for it.
+              Bring the workflow costing you the most time. We will tell you whether software
+              fixes it, and roughly what that would take.
             </p>
 
-            <div className="mt-9 flex w-full flex-col gap-3 xs:w-auto xs:flex-row xs:justify-center">
-              <Cta href="/request-software" size="lg" tone="dark" location="work-footer">
-                Request Custom Software
+            <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:justify-center">
+              <Cta href="/book" size="lg" tone="dark" location="work-footer">
+                Walk us through a workflow
               </Cta>
               <Cta
-                href="/book"
+                href="/request-software"
                 variant="secondary"
                 size="lg"
                 tone="dark"
                 location="work-footer"
               >
-                Book a Discovery Call
+                Tell us what isn&rsquo;t working
               </Cta>
             </div>
 

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Operava — custom software for landscaping companies that have outgrown generic tools";
+  "Operava — software built around how your business actually works: custom software and automation for contractors and service businesses";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -66,7 +66,7 @@ export default function OpengraphImage() {
               maxWidth: 960,
             }}
           >
-            Custom software for landscaping companies that have outgrown generic tools.
+            Software built around how your business actually works.
           </div>
           <div
             style={{
@@ -78,8 +78,8 @@ export default function OpengraphImage() {
               lineHeight: 1.4,
             }}
           >
-            Built around your workflows, crews, estimating and integrations — not somebody
-            else&rsquo;s CRM.
+            Custom software and automation for contractors and service businesses. Keep the
+            software that works — we fix the workflows that don&rsquo;t.
           </div>
         </div>
 

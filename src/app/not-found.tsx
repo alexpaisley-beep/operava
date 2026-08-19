@@ -47,7 +47,7 @@ export default function NotFound() {
             ))}
           </ul>
 
-          <div className="mt-10 flex flex-col gap-3 xs:flex-row">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Cta href="/" variant="secondary" location="404">
               Back to home
             </Cta>

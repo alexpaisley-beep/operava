@@ -51,7 +51,7 @@ const LABELS = {
   phone: "Phone",
   website: "Company website",
   companySize: "Company size",
-  crewCount: "Number of crews",
+  crewCount: "Crews or field teams",
   currentSoftware: "Current software",
   painPoints: "Biggest frustration",
   desiredSystem: "What you wish it could do",
@@ -204,7 +204,7 @@ export function BookingForm({ ctaSource = "book-page" }: { ctaSource?: string })
               maxLength={160}
               defaultValue={values.business ?? ""}
               error={errors.business}
-              placeholder="Reyes Landscape Group"
+              placeholder="Reyes Mechanical"
             />
             <TextInput
               id="email"
@@ -216,7 +216,7 @@ export function BookingForm({ ctaSource = "book-page" }: { ctaSource?: string })
               maxLength={200}
               defaultValue={values.email ?? ""}
               error={errors.email}
-              placeholder="jordan@reyeslandscape.com"
+              placeholder="jordan@reyesmechanical.com"
             />
             <TextInput
               id="phone"
@@ -241,7 +241,7 @@ export function BookingForm({ ctaSource = "book-page" }: { ctaSource?: string })
               maxLength={300}
               defaultValue={values.website ?? ""}
               error={errors.website}
-              placeholder="reyeslandscape.com"
+              placeholder="reyesmechanical.com"
               className="sm:col-span-2"
             />
             <Select
@@ -291,7 +291,7 @@ export function BookingForm({ ctaSource = "book-page" }: { ctaSource?: string })
             maxLength={800}
             defaultValue={values.currentSoftware ?? ""}
             error={errors.currentSoftware}
-            placeholder="Jobber, QuickBooks, two shared Google Sheets, a whiteboard"
+            placeholder="ServiceTitan, QuickBooks, two shared Google Sheets, a whiteboard"
           />
 
           <TextArea
@@ -304,7 +304,7 @@ export function BookingForm({ ctaSource = "book-page" }: { ctaSource?: string })
             rows={5}
             defaultValue={values.painPoints ?? ""}
             error={errors.painPoints}
-            placeholder="Recurring maintenance schedules fall apart whenever we move a crew. The office rebuilds next week by hand every Friday."
+            placeholder="Every change from the field gets texted in, then retyped into the schedule and again into QuickBooks. Something gets missed most weeks."
           />
 
           <TextArea
@@ -317,7 +317,7 @@ export function BookingForm({ ctaSource = "book-page" }: { ctaSource?: string })
             rows={4}
             defaultValue={values.desiredSystem ?? ""}
             error={errors.desiredSystem}
-            placeholder="I want to see every crew's week on one screen and move a job without breaking the rest of the route."
+            placeholder="I want to see every crew's week on one screen and move a job without breaking the rest of the schedule or the billing."
           />
         </section>
 

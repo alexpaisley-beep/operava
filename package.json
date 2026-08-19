@@ -2,7 +2,7 @@
   "name": "operava-site",
   "version": "1.0.0",
   "private": true,
-  "description": "Marketing site for Operava LLC — custom software for landscaping companies.",
+  "description": "Marketing site for Operava LLC — custom software and automation for contractors and service businesses.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

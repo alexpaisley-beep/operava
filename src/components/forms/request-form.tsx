@@ -17,7 +17,7 @@ const LABELS = {
   email: "Email",
   phone: "Phone",
   website: "Company website",
-  crewCount: "Team / crew size",
+  crewCount: "Crews or field teams",
   currentSoftware: "What you run on today",
   integrations: "Integrations you depend on",
   painPoints: "What is not working",
@@ -141,7 +141,7 @@ export function RequestForm({ ctaSource = "request-software-page" }: { ctaSource
             maxLength={300}
             defaultValue={values.website ?? ""}
             error={errors.website}
-            placeholder="reyeslandscape.com"
+            placeholder="reyesmechanical.com"
           />
           <Select
             id="crewCount"
@@ -168,7 +168,7 @@ export function RequestForm({ ctaSource = "request-software-page" }: { ctaSource
           maxLength={800}
           defaultValue={values.currentSoftware ?? ""}
           error={errors.currentSoftware}
-          placeholder="Jobber, QuickBooks Online, Google Sheets, a shared inbox"
+          placeholder="Procore, QuickBooks Online, Google Sheets, a shared inbox"
         />
         <TextInput
           id="integrations"
@@ -196,7 +196,7 @@ export function RequestForm({ ctaSource = "request-software-page" }: { ctaSource
           maxLength={2000}
           defaultValue={values.painPoints ?? ""}
           error={errors.painPoints}
-          placeholder="Estimating takes too long because our pricing depends on square footage tiers the software can't handle, so every quote gets rebuilt by hand in a spreadsheet."
+          placeholder="Estimating takes too long because our pricing depends on tiers the software can't handle, so every quote gets rebuilt by hand in a spreadsheet — and none of that carries over once we win the job."
         />
         <TextArea
           id="desiredSystem"

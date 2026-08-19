@@ -9,23 +9,28 @@ import { ProcessSteps } from "@/components/sections/process-steps";
 import { Cta } from "@/components/ui/button";
 import { Eyebrow, Section, SectionHeading } from "@/components/ui/section";
 import { goodFit, notFit } from "@/content/fit";
+import { industries, industryNote } from "@/content/industries";
 import { painPoints } from "@/content/pain";
 import { systemsBuilt } from "@/content/systems";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: { absolute: "Operava — Custom Software for Landscaping Companies" },
+  title: {
+    absolute: "Operava — Custom Software for Contractors and Service Businesses",
+  },
   description: site.description,
   alternates: { canonical: "/" },
 };
 
-// "Connects" leads with Jobber deliberately. The most common objection from an
-// established operator is "we already run on Jobber and we are not ripping it
-// out", and the answer is that they do not have to. Naming it first answers the
-// objection before it is raised.
+// "Fits alongside" rather than "Connects", and named platforms rather than a
+// category. The most common objection from an established operator is "we
+// already run on ServiceTitan / Procore / QuickBooks and we are not ripping it
+// out"; answering it in the first screenful is worth more than any adjective.
+// The verb is deliberately careful — we build against these APIs, we do not
+// claim a shelf of finished connectors. See content/capabilities.ts.
 const signals = [
-  { label: "Built for", value: "Multi-crew operations" },
-  { label: "Connects", value: "Jobber, QuickBooks, Stripe, Twilio" },
+  { label: "Built for", value: "Contractors and service operations" },
+  { label: "Fits alongside", value: "QuickBooks, ServiceTitan, Procore, Jobber" },
   { label: "Scope", value: "Fixed price, defined upfront" },
   { label: "After launch", value: "We host, monitor and support it" },
 ];
@@ -49,38 +54,42 @@ export default function Home() {
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
               <div className="rise-in">
-                <Eyebrow>{site.legalName} &middot; Custom software development</Eyebrow>
+                <Eyebrow>
+                  {site.legalName} &middot; Custom software &amp; automation for service
+                  businesses
+                </Eyebrow>
               </div>
 
               <h1
                 className="t-display rise-in mt-6 text-ink"
                 style={{ animationDelay: "60ms" }}
               >
-                Custom software for landscaping companies that have{" "}
+                Software built around how your business{" "}
                 <span className="underline decoration-leaf-400 decoration-[0.055em] underline-offset-[0.11em] [text-decoration-skip-ink:none]">
-                  outgrown
+                  actually
                 </span>{" "}
-                generic tools.
+                works.
               </h1>
 
               <p
                 className="t-lead rise-in mt-7 max-w-2xl text-ink-2"
                 style={{ animationDelay: "120ms" }}
               >
-                We build systems around your workflows, crews, customers, estimating,
-                scheduling, integrations and automation — instead of forcing your business into
-                somebody else&rsquo;s CRM.
+                Estimating, scheduling, the field, accounting and your customers all need the
+                same information — and somebody on your staff is still moving it between systems
+                by hand. We build the software and automation that closes those gaps, without
+                replacing everything you already run.
               </p>
 
               <div
-                className="rise-in mt-9 flex flex-col gap-3 xs:flex-row"
+                className="rise-in mt-9 flex flex-col gap-3 sm:flex-row"
                 style={{ animationDelay: "180ms" }}
               >
                 <Cta href="/book" size="lg" location="hero">
-                  Book a Discovery Call
+                  Walk us through a workflow
                 </Cta>
                 <Cta href="/request-software" variant="secondary" size="lg" location="hero">
-                  Request Custom Software
+                  Tell us what isn&rsquo;t working
                 </Cta>
               </div>
 
@@ -120,8 +129,8 @@ export default function Home() {
       <Section tone="surface" id="problem">
         <SectionHeading
           eyebrow="The problem"
-          title="Your software should fit your business. Not the other way around."
-          lead="Nobody outgrows their software all at once. It happens one workaround at a time, until the system everyone complains about is held together by spreadsheets and people who just know."
+          title="You already have software. The work still happens around it."
+          lead="Nobody outgrows their systems all at once. It happens one workaround at a time, until the important parts of the job run on spreadsheets, text messages and people who just know. Most operations recognise three or four of these, not all eight."
         />
 
         <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
@@ -135,9 +144,11 @@ export default function Home() {
           ))}
         </div>
 
-        <p className="mt-8 max-w-2xl text-[1.0625rem] leading-relaxed text-ink-2">
-          If your software works for 80% of your company and your team manually patches the
-          other 20%, that 20% is the part we build.
+        <p className="mt-8 max-w-3xl text-[1.0625rem] leading-relaxed text-ink-2">
+          If your crews, office staff, project managers and accounting all need the same
+          information, and somebody still has to move it between systems by hand, that is the
+          kind of problem we fix. Generic software handles about 80% of an operation. The other
+          20% is where your people go.
         </p>
       </Section>
 
@@ -148,15 +159,15 @@ export default function Home() {
             <div className="lg:col-span-6">
               <Eyebrow className="text-navy-200">The approach</Eyebrow>
               <h2 className="t-h1 mt-6 text-white">
-                Keep the tools that work. Replace the workflows that don&rsquo;t.
+                Keep the software that works. Fix the workflows that don&rsquo;t.
               </h2>
             </div>
 
             <div className="lg:col-span-6 lg:pt-4">
               <p className="t-lead text-navy-100">
-                Your operation is already custom. Your software can be too. We build the
-                specific parts generic products handle badly, and connect them to the systems
-                you already depend on.
+                You do not need to replace QuickBooks, your field software or your estimating
+                package. You need the layer between them — the handoffs, the missing tools, the
+                steps a person is doing manually because no product covers them.
               </p>
 
               <div className="mt-9 grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 sm:grid-cols-3">
@@ -166,8 +177,8 @@ export default function Home() {
                     body: "Real development against your actual workflows.",
                   },
                   {
-                    title: "Not a rip-out",
-                    body: "Working systems get integrated, not replaced.",
+                    title: "Not a migration",
+                    body: "The systems that work stay. We build what is missing.",
                   },
                   {
                     title: "Not open-ended",
@@ -193,8 +204,8 @@ export default function Home() {
       <Section tone="paper" id="what-we-build">
         <SectionHeading
           eyebrow="What we build"
-          title="The systems a growing landscaping company actually runs on."
-          lead="This is capability, not a package. Most projects use two or three of these. The discovery call is where we work out which ones are worth your money."
+          title="The parts of the operation your software leaves to your staff."
+          lead="This is capability, not a package. Most projects use two or three of these. The first call is where we work out which ones are worth your money."
         />
 
         <div className="mt-12">
@@ -211,12 +222,46 @@ export default function Home() {
         </div>
       </Section>
 
+      {/* ---------------------------------------------------------- Industries */}
+      <Section tone="muted" id="industries">
+        <SectionHeading
+          eyebrow="Who we build for"
+          title="Built for businesses where the work happens in the real world."
+          lead="The trade changes. The shape of the problem does not: people working away from the office, an office coordinating them, money that has to be costed and billed accurately, and several systems that each hold part of the truth."
+        />
+
+        {/* Five markets plus the "not on the list" cell — six items, so the
+            hairline grid stays square at every breakpoint instead of leaving a
+            bare cell showing the divider colour through the gap. */}
+        <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          {industries.map((industry) => (
+            <div key={industry.title} className="bg-paper p-6 lg:p-7">
+              <h3 className="text-[1.0625rem] font-semibold leading-snug tracking-[-0.015em] text-ink">
+                {industry.title}
+              </h3>
+              <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-ink-2">
+                {industry.body}
+              </p>
+            </div>
+          ))}
+
+          <div className="bg-surface p-6 lg:p-7">
+            <h3 className="text-[1.0625rem] font-semibold leading-snug tracking-[-0.015em] text-ink-2">
+              {industryNote.title}
+            </h3>
+            <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-ink-3">
+              {industryNote.body}
+            </p>
+          </div>
+        </div>
+      </Section>
+
       {/* ------------------------------------------------------------ Who it's for */}
       <Section tone="surface" id="fit">
         <SectionHeading
-          eyebrow="Who this is for"
-          title="Built for established landscaping companies."
-          lead="Custom software is worth it at a specific stage: when your operation has become specific enough that generic products cost you more than they save."
+          eyebrow="Whether it's worth it"
+          title="Worth doing at a specific stage. Not before."
+          lead="Custom software earns its money when your operation has become specific enough that generic products cost you more in workarounds than they save in licence fees."
         />
 
         <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-16">
@@ -330,12 +375,15 @@ export default function Home() {
         </div>
 
         {/* Credibility, in the order this ICP actually weighs it: ran the
-            operation first, built the software second. */}
+            operation first, built the software second. Deliberately claims
+            experience with THIS SHAPE OF BUSINESS, never tenure in a trade we
+            have not worked in. */}
         <p className="mt-8 max-w-3xl text-[0.9375rem] leading-relaxed text-ink-3">
-          Alex ran a lawn care business before building software for the industry. We have since
-          built and shipped scheduling, estimating, payments, payroll, customer portals and AI
-          phone answering for home-service operations. None of that is what we are selling you —
-          it is why we do not need to learn this industry on your budget.
+          Alex ran a home-service business before building software for one. We have since built
+          and shipped scheduling, estimating, payments, payroll, customer portals and AI phone
+          answering — production systems, running every day. None of that is what we are selling
+          you. It is why we do not need to be taught how an operation with people in the field
+          and an office behind them actually breaks.
         </p>
 
         {/* Quiet on purpose: the people who want evidence go looking for it,
@@ -366,9 +414,9 @@ export default function Home() {
               lead="There are no packages, because there is no such thing as a standard version of your company. What there is: a fixed price for a scope you approved before anyone wrote code."
             />
 
-            <div className="mt-9 flex flex-col gap-3 xs:flex-row">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Cta href="/book" location="home-pricing">
-                Book a Discovery Call
+                Walk us through a workflow
               </Cta>
               <Cta href="/pricing" variant="secondary" location="home-pricing">
                 See how pricing works
@@ -443,11 +491,11 @@ export default function Home() {
               {[
                 {
                   title: "We understand how service operations run",
-                  body: "Crews, routes, recurring work, estimating rules, the office in the middle. We are not learning your industry on your budget.",
+                  body: "Crews and techs in the field, recurring and project work, estimating rules, the office in the middle of all of it. We are not learning how this kind of business works on your budget.",
                 },
                 {
-                  title: "We have built complex home-service software before",
-                  body: "Scheduling engines, portals, payment infrastructure, AI intake. Shipped and running, not slideware.",
+                  title: "We have built complex operational software before",
+                  body: "Scheduling engines, portals, payment infrastructure, AI phone intake. Shipped and running, not slideware.",
                 },
                 {
                   title: "We work with real APIs, payments and business logic",

@@ -27,7 +27,7 @@ const factors = [
   },
   {
     title: "Integrations",
-    body: "Each external system adds real work — auth, data mapping, webhooks, failure handling.",
+    body: "Each system we connect adds real work — auth, data mapping, webhooks, failure handling, and whatever its API will not let us do.",
   },
   {
     title: "Data migration",
@@ -35,7 +35,7 @@ const factors = [
   },
   {
     title: "User roles",
-    body: "Office, sales, crew leads, crews, customers. Each role is a different view and a different set of permissions.",
+    body: "Office, sales, project managers, foremen, techs, customers. Each role is a different view and a different set of permissions.",
   },
   {
     title: "Automation",
@@ -101,9 +101,9 @@ export default function PricingPage() {
                 company. What you get instead is a fixed price against a written scope, agreed
                 before anyone writes code.
               </p>
-              <div className="mt-9 flex flex-col gap-3 xs:flex-row">
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Cta href="/book" size="lg" location="pricing-hero">
-                  Book a Discovery Call
+                  Walk us through a workflow
                 </Cta>
                 <Cta
                   href="/request-software"
@@ -111,7 +111,7 @@ export default function PricingPage() {
                   size="lg"
                   location="pricing-hero"
                 >
-                  Request Custom Software
+                  Tell us what isn&rsquo;t working
                 </Cta>
               </div>
             </div>
@@ -135,9 +135,13 @@ export default function PricingPage() {
                       note: "Hosting, maintenance and support",
                     },
                   ].map((row) => (
+                    // `flex-wrap`: the price keeps `whitespace-nowrap` so it never
+                    // breaks mid-figure, which means on a very narrow phone it has
+                    // to be allowed to drop below the label instead of pushing the
+                    // whole page into a horizontal scroll.
                     <div
                       key={row.term}
-                      className="flex items-baseline justify-between gap-4 p-6"
+                      className="flex flex-wrap items-baseline justify-between gap-4 p-6"
                     >
                       <div>
                         <dt className="text-[0.9375rem] font-medium text-ink">{row.term}</dt>
@@ -166,7 +170,7 @@ export default function PricingPage() {
         <SectionHeading
           eyebrow="What moves the number"
           title="Price follows scope. Here is what scope is made of."
-          lead="A single-department system with one integration sits near the bottom of the range. A build spanning sales, operations and accounting with data migration sits well above it."
+          lead="One workflow connected between two systems you already run sits near the bottom of the range. A build spanning sales, operations and accounting with data migration sits well above it."
         />
 
         <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
@@ -271,7 +275,7 @@ export default function PricingPage() {
       <CtaBand
         location="pricing-footer"
         title="The number depends on your operation. Let's find out what it is."
-        lead="Discovery is where scope comes from, and scope is where the price comes from. Nothing is quoted before we understand the work."
+        lead="Scope comes from understanding the workflow, and the price comes from the scope. Nothing is quoted before we understand the work."
       />
     </>
   );

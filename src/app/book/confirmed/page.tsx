@@ -123,7 +123,7 @@ export default async function BookConfirmedPage({
                 Worth a look before the call — it will make the conversation faster.
               </p>
             </div>
-            <div className="flex flex-col gap-3 xs:flex-row">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <Cta href="/process" variant="secondary" location="book-confirmed">
                 How we scope a project
               </Cta>

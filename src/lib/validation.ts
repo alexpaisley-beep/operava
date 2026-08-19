@@ -91,7 +91,7 @@ export function validate(values: Record<string, string>, schema: Schema): Valida
     }
 
     if (rule.kind === "url" && !normalizeUrl(value)) {
-      errors[field] = "Enter a valid website address, like acme-landscaping.com.";
+      errors[field] = "Enter a valid website address, like yourcompany.com.";
       continue;
     }
   }

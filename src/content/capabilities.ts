@@ -1,6 +1,17 @@
 /**
  * What we're capable of building. Deliberately framed as capability, not as a
  * package — no project includes all of this, and the copy says so out loud.
+ *
+ * Ordered and titled by BUSINESS PROBLEM rather than by product category. An
+ * owner is not shopping for "a CRM" or "an integration"; they are trying to
+ * stop paying somebody to retype a change order. The summary line names the
+ * problem, the points name what actually gets built.
+ *
+ * One honesty rule on the named systems below: naming QuickBooks, ServiceTitan,
+ * Jobber, Procore or Buildertrend here is a statement that we build against
+ * their APIs, not that a connector is sitting on a shelf. What any given
+ * platform's API genuinely allows gets checked during discovery, before it
+ * becomes an assumption in a scope document — the FAQ says the same thing.
  */
 
 export type Capability = {
@@ -13,120 +24,123 @@ export type Capability = {
 
 export const capabilities: Capability[] = [
   {
-    id: "crm",
+    id: "connect",
     index: "01",
-    title: "Custom CRM",
+    title: "Connect what you already run",
     summary:
-      "Customer records that match how your company thinks about customers — not how a software vendor decided to model them.",
+      "Your field software, your accounting and your spreadsheets hold the same information, and none of them share it. We move it between them automatically, in both directions.",
     points: [
-      "Properties, contacts and job history under one customer",
-      "Communication log tied to the customer, not somebody's inbox",
-      "Custom fields for the things your team actually tracks",
-      "Per-customer pricing, contracts and renewal dates",
-      "Notes crews can read and office staff can trust",
+      "QuickBooks, so the books stay reconciled without anyone retyping",
+      "Field, service and project software — Jobber, ServiceTitan, Procore, Buildertrend and similar",
+      "Stripe and card, ACH or stored payment methods",
+      "Twilio for SMS, call routing and notifications",
+      "Email, calendars and the line-of-business tools nobody is giving up",
+      "REST APIs and webhooks in both directions, with retries and reconciliation",
     ],
   },
   {
-    id: "scheduling",
+    id: "automate",
     index: "02",
-    title: "Scheduling & Crew Operations",
+    title: "Automate the manual handoffs",
     summary:
-      "Recurring maintenance, one-off projects and multiple crews on the same board — without a spreadsheet holding it together.",
+      "The steps that only happen because someone remembers them: re-entry, follow-ups, notifications, document handling and the monthly reconciliation nobody wants.",
     points: [
-      "Recurring service schedules that survive weather and reschedules",
-      "Crew assignment by skill, equipment or service line",
-      "A crew view built for a phone in a truck, not a desktop",
+      "The same information entered once instead of in three systems",
+      "Estimate and invoice follow-up that stops the moment someone replies",
+      "Appointment, service and renewal reminders that send themselves",
+      "Internal handoffs between office, sales, PMs and the field",
+      "Documents generated, filed and attached to the right job",
+      "Lead routing by service line, territory or value",
+    ],
+  },
+  {
+    id: "field",
+    index: "03",
+    title: "Field-to-office operations",
+    summary:
+      "A change called in from a jobsite should not need three people to become a schedule change, a change order and an invoice line.",
+    points: [
+      "A field view built for a phone in a truck, not a desktop",
       "Job status that updates the office without a phone call",
-      "Route order and day sequencing",
+      "Photos, notes and documentation attached to the job, not to a phone",
+      "Scheduling and dispatch across crews, techs and service lines",
+      "Recurring and contract work that survives a reschedule",
+      "Day sequencing, routing and crew assignment",
     ],
   },
   {
     id: "estimating",
-    index: "03",
-    title: "Estimating & Quoting",
+    index: "04",
+    title: "Estimating & change orders",
     summary:
-      "Your pricing rules encoded properly, so estimates stop depending on who is building them.",
+      "Your pricing rules encoded properly, and the context of the estimate carried into the job instead of being rebuilt from memory once the work is awarded.",
     points: [
       "Pricing logic based on your measurements, tiers and modifiers",
       "Templates for the work you quote every week",
-      "Multi-option proposals customers can actually understand",
-      "Approval steps before anything goes out the door",
+      "Multi-option proposals a customer can actually understand",
+      "Approvals before anything goes out the door",
       "Digital acceptance and signature capture",
+      "Change orders priced, approved, scheduled and billed as one flow",
+    ],
+  },
+  {
+    id: "internal-tools",
+    index: "05",
+    title: "Internal tools & custom CRM",
+    summary:
+      "The spreadsheet that quietly became a system, turned into software your team can actually run on — with permissions, history and no risk of somebody sorting one column.",
+    points: [
+      "Customer, property and site records modelled the way your company thinks",
+      "Custom fields and statuses for the things your team actually tracks",
+      "The workflow no product supports, built as its own tool",
+      "Roles and permissions, so the right people see the right records",
+      "History and audit trail instead of a version called final-v3",
+      "Contracts, service agreements and renewal dates in one place",
     ],
   },
   {
     id: "portals",
-    index: "04",
-    title: "Customer Portals",
+    index: "06",
+    title: "Customer self-service",
     summary:
-      "A place customers can answer their own questions, so the office stops answering the same five calls.",
+      "When was I serviced, what did I approve, what do I owe. Every one of those is currently a staffed phone call.",
     points: [
-      "Service history and upcoming visits",
-      "Estimates to review, approve and sign",
+      "Service history, upcoming visits and project status",
+      "Estimates and change orders to review, approve and sign",
       "Invoices and online payment",
       "Service requests that land in your workflow, not an inbox",
-      "Documents, photos and property details",
+      "Documents, photos and site details",
       "Lives inside your existing website or alongside it — customers see one company, not two systems",
     ],
   },
   {
-    id: "integrations",
-    index: "05",
-    title: "Integrations",
+    id: "reporting",
+    index: "07",
+    title: "Job costing & reporting",
     summary:
-      "Keep the systems that already work. We connect them instead of replacing them for the sake of it.",
-    // Jobber leads deliberately. "We already run on Jobber" is the most common
-    // reason an established operator stops reading, and the answer is that they
-    // do not have to rip it out.
+      "Numbers reconciled once by the system, instead of assembled by hand out of three tools at the end of every month.",
     points: [
-      "Jobber and the field tools your crews already know",
-      "QuickBooks for accounting that stays reconciled",
-      "Stripe for cards, ACH and stored payment methods",
-      "Twilio for SMS, call routing and notifications",
-      "Email, calendars and existing line-of-business tools",
-      "REST APIs and webhooks in both directions",
-    ],
-  },
-  {
-    id: "automation",
-    index: "06",
-    title: "Automation",
-    summary:
-      "The repetitive admin your staff does because the software will not. Encoded once, then it just happens.",
-    points: [
-      "Estimate follow-up sequences that stop when someone replies",
-      "Lead routing by service line, territory or value",
-      "Appointment and service reminders",
-      "Renewal and seasonal campaign triggers",
-      "Internal handoffs between office, sales and crews",
+      "Job costing against estimated hours and materials",
+      "Margin by job, service line, crew and customer",
+      "Revenue, recurring work and contract renewals",
+      "Close rates by lead source and estimator",
+      "Field productivity and schedule adherence",
+      "Reports built on one set of figures, not three that nearly agree",
     ],
   },
   {
     id: "ai",
-    index: "07",
-    title: "AI Tools",
-    summary:
-      "Applied where it removes real work. Not bolted on so we can put the word on a slide.",
-    points: [
-      "AI receptionist that answers, qualifies and books",
-      "Intake that turns a messy phone call into a structured lead",
-      "Internal assistants over your own operational data",
-      "Drafting for estimates, follow-ups and customer replies",
-      "Classification and routing for inbound requests",
-    ],
-  },
-  {
-    id: "reporting",
     index: "08",
-    title: "Reporting & Dashboards",
+    title: "AI where it removes real work",
     summary:
-      "The numbers you actually run the company on — not a generic CRM dashboard nobody opens.",
+      "Applied to specific jobs where it saves measurable hours — reading documents, handling calls, drafting replies. Not bolted on so the word appears on a page.",
     points: [
-      "Revenue by service line, crew and property type",
-      "Job costing against estimated hours",
-      "Close rates by lead source and estimator",
-      "Recurring revenue and contract renewals",
-      "Crew productivity and schedule adherence",
+      "Pulling structured data out of invoices, POs, plans and submittals",
+      "Turning a messy phone call or email into a structured lead or request",
+      "AI phone answering that qualifies, books and hands off to a person",
+      "Drafting estimates, follow-ups and customer replies for review",
+      "Classifying and routing inbound requests",
+      "Consequential actions held for a human to approve, always",
     ],
   },
 ];
