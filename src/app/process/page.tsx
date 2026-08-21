@@ -3,20 +3,18 @@ import type { Metadata } from "next";
 import { CtaBand } from "@/components/cta-band";
 import { ProcessSteps } from "@/components/sections/process-steps";
 import { Section, SectionHeading, Eyebrow } from "@/components/ui/section";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Process",
+export const metadata: Metadata = pageMetadata({
+  title: "Our Custom Software Development Process",
   description:
-    "How Operava scopes and builds custom software: you show us the workflow, we map the problem and price it, we build the missing piece, and your team stops babysitting it.",
-  alternates: { canonical: "/process" },
-  openGraph: {
-    title: "Process — Operava",
-    description:
-      "Show us the workflow, we map the problem, we build the missing piece, your team stops babysitting it.",
-    url: `${site.url}/process`,
-  },
-};
+    "How Operava scopes and builds custom software: show us the workflow, we map and price the problem, we build it, and your team stops babysitting it.",
+  path: "/process",
+  ogTitle: "Process — Operava",
+  ogDescription:
+    "Show us the workflow, we map the problem, we build the missing piece, your team stops babysitting it.",
+});
 
 const principles = [
   {

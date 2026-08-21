@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 
 import { Eyebrow } from "@/components/ui/section";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Privacy",
-  description:
-    "How Operava LLC handles the information you submit through the discovery call and custom software request forms.",
-  alternates: { canonical: "/privacy" },
+  ...pageMetadata({
+    title: "Privacy Policy",
+    description:
+      "How Operava LLC handles the information you submit through the discovery call and custom software request forms.",
+    path: "/privacy",
+    ogTitle: "Privacy — Operava",
+  }),
+  // Explicit rather than inherited: a privacy policy is the page most likely
+  // to be assumed noindex by whoever touches this next.
   robots: { index: true, follow: true },
 };
 

@@ -2,19 +2,17 @@ import type { Metadata } from "next";
 
 import { Cta } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/section";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Us About a Custom Software Project",
   description:
-    "Get in touch with Operava LLC about custom software and automation for your service business. Book a discovery call, send a software request, or email us directly.",
-  alternates: { canonical: "/contact" },
-  openGraph: {
-    title: "Contact — Operava",
-    description: "Book a discovery call, request custom software, or email Operava directly.",
-    url: `${site.url}/contact`,
-  },
-};
+    "Get in touch with Operava about custom software and automation for your service business. Book a discovery call, send a request, or email us.",
+  path: "/contact",
+  ogTitle: "Contact — Operava",
+  ogDescription: "Book a discovery call, request custom software, or email Operava directly.",
+});
 
 export default function ContactPage() {
   return (

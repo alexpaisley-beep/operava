@@ -6,20 +6,17 @@ import { CapabilityGrid } from "@/components/sections/capability-grid";
 import { Section, SectionHeading, Eyebrow } from "@/components/ui/section";
 import { capabilities } from "@/content/capabilities";
 import { systemsBuilt } from "@/content/systems";
-import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "What We Build",
+export const metadata: Metadata = pageMetadata({
+  title: "Construction Workflow Automation & Custom Software",
   description:
-    "Integrations between the systems you already run, automation for manual handoffs, field-to-office workflows, estimating and change orders, internal tools, job costing and AI where it removes real work.",
-  alternates: { canonical: "/what-we-build" },
-  openGraph: {
-    title: "What We Build — Operava",
-    description:
-      "The parts of a contracting or service operation that generic software leaves to your staff.",
-    url: `${site.url}/what-we-build`,
-  },
-};
+    "Integrations, workflow automation, field-to-office systems, estimating and change orders, and internal tools for contractors and service businesses.",
+  path: "/what-we-build",
+  ogTitle: "What We Build — Operava",
+  ogDescription:
+    "The parts of a contracting or service operation that generic software leaves to your staff.",
+});
 
 const boundaries = [
   {

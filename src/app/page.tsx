@@ -14,11 +14,11 @@ import { painPoints } from "@/content/pain";
 import { systemsBuilt } from "@/content/systems";
 import { site } from "@/lib/site";
 
+// Title and description are inherited from the root layout — this IS the page
+// that layout's defaults describe, so restating them here would be two copies
+// of one string. The canonical is declared because the layout deliberately
+// sets none.
 export const metadata: Metadata = {
-  title: {
-    absolute: "Operava — Custom Software for Contractors and Service Businesses",
-  },
-  description: site.description,
   alternates: { canonical: "/" },
 };
 

@@ -2,20 +2,19 @@ import type { Metadata } from "next";
 
 import { CtaBand } from "@/components/cta-band";
 import { Section, SectionHeading, Eyebrow } from "@/components/ui/section";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "About",
+export const metadata: Metadata = pageMetadata({
+  // Absolute: the template would otherwise render "About Operava — Operava".
+  title: { absolute: `About ${site.name} — Custom Software for Contractors` },
   description:
-    "Operava LLC builds custom software and automation for contractors and service businesses — service-operation domain experience, production software development, and integration-heavy systems.",
-  alternates: { canonical: "/about" },
-  openGraph: {
-    title: "About — Operava",
-    description:
-      "Operava LLC builds software for service businesses with workflows that generic products fail to handle cleanly.",
-    url: `${site.url}/about`,
-  },
-};
+    "Operava LLC builds custom software for contractors and service businesses, with real service-operation experience behind the systems we deliver.",
+  path: "/about",
+  ogTitle: "About — Operava",
+  ogDescription:
+    "Operava LLC builds software for service businesses with workflows that generic products fail to handle cleanly.",
+});
 
 const strengths = [
   {

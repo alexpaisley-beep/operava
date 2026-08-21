@@ -22,7 +22,7 @@ const mono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Operava — Custom software for contractors and service businesses",
+    default: `Custom Software & Automation for Contractors — ${site.name}`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
@@ -40,12 +40,16 @@ export const metadata: Metadata = {
   authors: [{ name: site.legalName, url: site.url }],
   creator: site.legalName,
   publisher: site.legalName,
-  alternates: { canonical: "/" },
+  // No `alternates` here on purpose. A canonical set on the root layout is
+  // inherited by every page that does not set its own, which silently points
+  // whole routes at the homepage. Each page declares its own canonical, and a
+  // page that forgets gets none — Google then falls back to the request URL,
+  // which is correct, rather than to "/", which is not.
   openGraph: {
     type: "website",
     siteName: site.name,
     locale: "en_US",
-    url: site.url,
+    url: "/",
     title: "Software built around how your business actually works",
     description: site.description,
   },
@@ -91,6 +95,7 @@ const organizationSchema = {
   makesOffer: {
     "@type": "Offer",
     name: "Custom software and automation for service businesses",
+    url: `${site.url}/pricing`,
     priceSpecification: {
       "@type": "PriceSpecification",
       price: 6000,

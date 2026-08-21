@@ -69,7 +69,8 @@ src/
     actions.ts                     Server actions + anti-spam
     validation.ts                  Dependency-free field validation
     analytics.ts                   Vendor-neutral conversion events
-    site.ts                        Company facts, nav, env overrides
+    seo.ts                         Per-page canonical + Open Graph metadata
+    site.ts                        Company facts, nav, canonical origin
 ```
 
 Copy lives in `src/content/*` as typed data, so wording changes never require
@@ -198,6 +199,50 @@ Events: `cta_clicked`, `booking_started`, `booking_submitted`,
 ## Configuration
 
 Copy `.env.example` to `.env.local`. Nothing in it is required to run the site.
+
+## Domains and SEO
+
+The canonical production host is **`https://www.operava-systems.com`**.
+
+Everything a search engine reads — the canonical tag on each page, the sitemap,
+robots.txt, the Open Graph URLs and the JSON-LD `@id`s — is derived from
+`site.url` in `src/lib/site.ts`, which the root layout feeds to `metadataBase`.
+There is one place to change the domain, and it defaults to the canonical host,
+so a deploy with no environment configuration is already correct.
+
+`NEXT_PUBLIC_SITE_URL` still overrides it for a preview or staging deploy that
+should point at itself. Three values are _not_ honoured — the retired
+`operavallc.com`, its www form, and the bare `operava-systems.com` apex — because
+each is this same site under a name that must not appear in metadata. They are
+corrected back to the canonical host rather than trusted.
+
+That distinction is the whole reason this section exists. The site previously
+told Google it lived on `operavallc.com`: the fallback in `site.ts` named the old
+domain, production never set `NEXT_PUBLIC_SITE_URL`, and so every page — while
+returning 200 and crawling fine — self-canonicalised onto a host Search Console
+was not indexing. Nothing failed loudly. `tests/unit/seo.test.ts` now fails if
+any of it regresses.
+
+### Redirects
+
+`next.config.ts` permanently redirects (308, path and query preserved) to the
+canonical host from `operavallc.com`, `www.operavallc.com` and the
+`operava-systems.com` apex.
+
+These only fire for requests that actually reach this app. Whichever of those
+hostnames you want redirected must be attached to this deployment in the hosting
+provider and pointed here in DNS — otherwise the rule never runs and the old
+domain keeps serving whatever it serves today. If the platform already does
+apex → www at the edge, the in-app rule is simply a harmless second line.
+
+### Still configured outside this repo
+
+- **DNS / hosting.** `operavallc.com` and `operava-systems.com` must both resolve
+  to this deployment for the redirects above to apply.
+- **Search Console.** Verify the `www.operava-systems.com` property, submit
+  `https://www.operava-systems.com/sitemap.xml`, and — once the old domain
+  redirects — use the Change of Address tool from the `operavallc.com` property.
+  Reindexing is Google's schedule, not ours.
 
 ## Accessibility & progressive enhancement
 
