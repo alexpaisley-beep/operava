@@ -3,20 +3,18 @@ import type { Metadata } from "next";
 import { Cta } from "@/components/ui/button";
 import { Eyebrow, Section, SectionHeading } from "@/components/ui/section";
 import { builtSystems, clientEntryPromise, clientPortfolio } from "@/content/work";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Work",
+export const metadata: Metadata = pageMetadata({
+  title: "Contractor & Construction Software We've Built",
   description:
-    "The software Operava has actually built and still runs. What each system does, what it handles, and what it proves about the work we can do for you. No invented case studies.",
-  alternates: { canonical: "/work" },
-  openGraph: {
-    title: "Work — Operava",
-    description:
-      "What we have built, what it does, and what it proves. Including the parts that are not finished.",
-    url: `${site.url}/work`,
-  },
-};
+    "The software Operava has actually built and still runs: what each system does, what it handles, and what it proves. No invented case studies.",
+  path: "/work",
+  ogTitle: "Work — Operava",
+  ogDescription:
+    "What we have built, what it does, and what it proves. Including the parts that are not finished.",
+});
 
 /**
  * Status pill. The tone carries meaning, so it is derived from the data rather

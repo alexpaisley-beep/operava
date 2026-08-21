@@ -2,20 +2,18 @@ import type { Metadata } from "next";
 
 import { BookingForm } from "@/components/forms/booking-form";
 import { Eyebrow } from "@/components/ui/section";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Book a Discovery Call",
+export const metadata: Metadata = pageMetadata({
+  title: "Book a Custom Software Discovery Call",
   description:
-    "Walk us through a workflow that is costing your business time. We map how your operation runs today and what is genuinely worth building. Custom projects start at $6,000.",
-  alternates: { canonical: "/book" },
-  openGraph: {
-    title: "Book a Discovery Call — Operava",
-    description:
-      "Tell us how your company runs and where the software stops. Custom builds start at $6,000.",
-    url: `${site.url}/book`,
-  },
-};
+    "Walk us through a workflow that is costing your business time. We map how your operation runs and what is worth building. Projects start at $6,000.",
+  path: "/book",
+  ogTitle: "Book a Discovery Call — Operava",
+  ogDescription:
+    "Tell us how your company runs and where the software stops. Custom builds start at $6,000.",
+});
 
 const covered = [
   "How work moves from request to paid today",

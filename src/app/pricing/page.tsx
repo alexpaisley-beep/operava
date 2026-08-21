@@ -5,20 +5,18 @@ import { Faq, FaqSchema } from "@/components/faq";
 import { Cta } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/ui/section";
 import { faqItems } from "@/content/faq";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Pricing",
+export const metadata: Metadata = pageMetadata({
+  title: "Custom Software Pricing for Contractors",
   description:
-    "Custom software projects from Operava start at $6,000, priced on scope rather than sold as packages. 50% to begin, 50% at launch, with hosting, maintenance and support from $200/month.",
-  alternates: { canonical: "/pricing" },
-  openGraph: {
-    title: "Pricing — Operava",
-    description:
-      "Custom projects start at $6,000. Fixed scope, fixed price, agreed before development starts.",
-    url: `${site.url}/pricing`,
-  },
-};
+    "Custom software projects start at $6,000, priced on scope rather than sold in packages. 50% up front, 50% at launch. Support from $200/month.",
+  path: "/pricing",
+  ogTitle: "Pricing — Operava",
+  ogDescription:
+    "Custom projects start at $6,000. Fixed scope, fixed price, agreed before development starts.",
+});
 
 const factors = [
   {

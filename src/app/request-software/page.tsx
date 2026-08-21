@@ -3,20 +3,18 @@ import type { Metadata } from "next";
 import { RequestForm } from "@/components/forms/request-form";
 import { Cta } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/section";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Request Custom Software",
+export const metadata: Metadata = pageMetadata({
+  title: "Request Custom Software for Your Business",
   description:
-    "Tell us what is wasting time, breaking, or forcing your team into workarounds. Operava builds custom software and automation for contractors and service businesses.",
-  alternates: { canonical: "/request-software" },
-  openGraph: {
-    title: "Request Custom Software — Operava",
-    description:
-      "You don't need to know exactly what software you need. Tell us what's costing you time.",
-    url: `${site.url}/request-software`,
-  },
-};
+    "Tell us what is wasting time, breaking, or forcing your team into workarounds. Operava builds custom software for contractors and service businesses.",
+  path: "/request-software",
+  ogTitle: "Request Custom Software — Operava",
+  ogDescription:
+    "You don't need to know exactly what software you need. Tell us what's costing you time.",
+});
 
 // Deliberately drawn from different trades. A visitor should find at least one
 // of these recognisable without having to translate it out of somebody else's
