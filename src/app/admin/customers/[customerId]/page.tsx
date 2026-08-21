@@ -10,8 +10,8 @@ import {
   Panel,
   PanelHeader,
 } from "@/components/portal/bits";
+import { requireAdminDb } from "@/lib/portal/admin-guard";
 import { getCustomerDetail } from "@/lib/portal/reads/internal";
-import { createServiceClient } from "@/lib/portal/supabase/server";
 import { uuid } from "@/lib/portal/validation";
 
 import { EditCustomerForm, InviteUserForm, NewProjectForm } from "./forms";
@@ -26,7 +26,7 @@ export default async function AdminCustomerPage({
   const { customerId } = await params;
   if (!uuid.safeParse(customerId).success) notFound();
 
-  const db = createServiceClient();
+  const { db } = await requireAdminDb();
   const detail = await getCustomerDetail(db, customerId);
   if (!detail) notFound();
 

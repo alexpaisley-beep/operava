@@ -3,8 +3,8 @@ import Link from "next/link";
 
 import { Badge } from "@/components/portal/badges";
 import { EmptyState, Panel, PanelHeader } from "@/components/portal/bits";
+import { requireAdminDb } from "@/lib/portal/admin-guard";
 import { listCustomers } from "@/lib/portal/reads/internal";
-import { createServiceClient } from "@/lib/portal/supabase/server";
 import { COMPANY_STATUS_LABELS } from "@/lib/portal/types";
 
 import { NewCustomerForm } from "./new-customer-form";
@@ -19,7 +19,7 @@ const STATUS_TONES = {
 } as const;
 
 export default async function AdminCustomersPage() {
-  const db = createServiceClient();
+  const { db } = await requireAdminDb();
   const customers = await listCustomers(db);
 
   return (

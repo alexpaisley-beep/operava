@@ -252,61 +252,52 @@ describe("client requests (action items)", () => {
   });
 });
 
-describe("customer request submission (the one client write)", () => {
-  it("accepts a request with the client's own profile and submitted status", async () => {
-    if (skipIfNoCluster()) return;
-    await asUser(db, "authenticated", A1, async () => {
-      const inserted = await db.query(
-        `insert into requests (project_id, created_by, type, title)
-         values ($1, $2, 'question', 'When do we launch?') returning id`,
-        [IDS.projectA1, IDS.profileA1],
-      );
-      expect(inserted.rowCount).toBe(1);
-    });
-  });
-
-  it("rejects a spoofed created_by", async () => {
+describe("customer writes go only through the audited service layer (hardening)", () => {
+  // The client insert policies on requests / request_comments were removed:
+  // every write now flows through the service layer, which records an audit
+  // entry. A client hitting PostgREST directly can read but never write.
+  it("a client cannot insert a request directly via the API role", async () => {
     if (skipIfNoCluster()) return;
     await asUser(db, "authenticated", A1, async () => {
       await expect(
         db.query(
           `insert into requests (project_id, created_by, type, title)
-           values ($1, $2, 'question', 'spoof')`,
-          [IDS.projectA1, IDS.adminProfile],
-        ),
-      ).rejects.toMatchObject({ code: "42501" });
-    });
-  });
-
-  it("rejects submissions into another tenant's project", async () => {
-    if (skipIfNoCluster()) return;
-    await asUser(db, "authenticated", A1, async () => {
-      await expect(
-        db.query(
-          `insert into requests (project_id, created_by, type, title)
-           values ($1, $2, 'question', 'cross-tenant')`,
-          [IDS.projectB1, IDS.profileA1],
-        ),
-      ).rejects.toMatchObject({ code: "42501" });
-    });
-  });
-
-  it("rejects a non-submitted initial status", async () => {
-    if (skipIfNoCluster()) return;
-    await asUser(db, "authenticated", A1, async () => {
-      await expect(
-        db.query(
-          `insert into requests (project_id, created_by, type, title, status)
-           values ($1, $2, 'question', 'pre-approved', 'approved')`,
+           values ($1, $2, 'question', 'direct insert')`,
           [IDS.projectA1, IDS.profileA1],
         ),
       ).rejects.toMatchObject({ code: "42501" });
     });
   });
+
+  it("a client cannot insert a request comment directly via the API role", async () => {
+    if (skipIfNoCluster()) return;
+    await asUser(db, "authenticated", A1, async () => {
+      await expect(
+        db.query(
+          `insert into request_comments (request_id, created_by, body, visibility)
+           values ($1, $2, 'direct', 'customer')`,
+          [IDS.requestA1, IDS.profileA1],
+        ),
+      ).rejects.toMatchObject({ code: "42501" });
+    });
+  });
+
+  it("a client can still read their own requests and customer-visible comments", async () => {
+    if (skipIfNoCluster()) return;
+    await asUser(db, "authenticated", A1, async () => {
+      const requests = await db.query("select id from requests");
+      expect(requests.rows).toHaveLength(1);
+      const comments = await db.query("select body from request_comments");
+      expect(JSON.stringify(comments.rows)).not.toContain("INTERNAL-COMMENT");
+    });
+  });
 });
 
-describe("storage objects", () => {
-  it("clients read only their own project's folder", async () => {
+describe("storage objects (hardening: no direct client storage access)", () => {
+  // Customers download through short-lived signed URLs minted by the service
+  // role, so they need no direct storage read — and must not have it, because
+  // a folder-level read policy would otherwise expose internal files too.
+  it("a client sees NO storage objects directly, including internal files in their own folder", async () => {
     if (skipIfNoCluster()) return;
     const rows = await asUser(
       db,
@@ -314,16 +305,30 @@ describe("storage objects", () => {
       A1,
       async () => (await db.query("select name from storage.objects")).rows,
     );
-    expect(rows.map((r) => r.name)).toEqual([`${IDS.projectA1}/x/spec.pdf`]);
+    expect(rows).toHaveLength(0);
+    expect(JSON.stringify(rows)).not.toContain("internal.pdf");
   });
 
-  it("clients cannot write into another tenant's folder", async () => {
+  it("a client cannot write into storage directly (no unaudited uploads)", async () => {
     if (skipIfNoCluster()) return;
     await asUser(db, "authenticated", A1, async () => {
       await expect(
         db.query("insert into storage.objects (bucket_id, name) values ('project-files', $1)", [
-          `${IDS.projectB1}/evil.pdf`,
+          `${IDS.projectA1}/sneaky.pdf`,
         ]),
+      ).rejects.toMatchObject({ code: "42501" });
+    });
+  });
+
+  it("a client cannot insert a project_files metadata row directly (audit bypass closed)", async () => {
+    if (skipIfNoCluster()) return;
+    await asUser(db, "authenticated", A1, async () => {
+      await expect(
+        db.query(
+          `insert into project_files (project_id, uploaded_by, name, path, visibility)
+           values ($1, $2, 'x.pdf', $3, 'customer')`,
+          [IDS.projectA1, IDS.profileA1, `${IDS.projectA1}/direct/x.pdf`],
+        ),
       ).rejects.toMatchObject({ code: "42501" });
     });
   });

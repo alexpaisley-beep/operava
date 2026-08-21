@@ -19,8 +19,8 @@ import {
   PanelHeader,
   ProgressBar,
 } from "@/components/portal/bits";
+import { requireAdminDb } from "@/lib/portal/admin-guard";
 import { getProjectDetail, listAdminProfiles } from "@/lib/portal/reads/internal";
-import { createServiceClient } from "@/lib/portal/supabase/server";
 import {
   FILE_CATEGORY_LABELS,
   LINK_KIND_LABELS,
@@ -59,7 +59,7 @@ export default async function AdminProjectPage({
   const { projectId } = await params;
   if (!uuid.safeParse(projectId).success) notFound();
 
-  const db = createServiceClient();
+  const { db } = await requireAdminDb();
   const [detail, admins] = await Promise.all([
     getProjectDetail(db, projectId),
     listAdminProfiles(db),

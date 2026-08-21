@@ -10,13 +10,13 @@ import {
   PanelHeader,
   ProgressBar,
 } from "@/components/portal/bits";
+import { requireAdminDb } from "@/lib/portal/admin-guard";
 import { adminOverview } from "@/lib/portal/reads/internal";
-import { createServiceClient } from "@/lib/portal/supabase/server";
 
 export const metadata: Metadata = { title: "Projects — Operava admin" };
 
 export default async function AdminOverviewPage() {
-  const db = createServiceClient();
+  const { db } = await requireAdminDb();
   const { projects, openClientRequests, recentActivity, customerCount } =
     await adminOverview(db);
 

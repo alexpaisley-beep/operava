@@ -270,6 +270,7 @@ export async function seed(client: Client): Promise<void> {
 
     insert into storage.objects (bucket_id, name) values
       ('project-files', '${IDS.projectA1}/x/spec.pdf'),
+      ('project-files', '${IDS.projectA1}/y/internal.pdf'),
       ('project-files', '${IDS.projectB1}/z/b-file.pdf');
 
     insert into mcp_ops (tool, idempotency_key, result) values

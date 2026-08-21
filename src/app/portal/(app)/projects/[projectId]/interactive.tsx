@@ -2,8 +2,9 @@
 
 import { useActionState, useState } from "react";
 
+import { EnumSelect, toOptions } from "@/components/portal/enum-select";
 import { PendingSubmit } from "@/components/portal/pending-submit";
-import { Select, TextArea, TextInput } from "@/components/ui/field";
+import { TextArea, TextInput } from "@/components/ui/field";
 import { idleActionState } from "@/lib/portal/action-state";
 import { REQUEST_TYPE_LABELS, REQUEST_TYPES } from "@/lib/portal/types";
 
@@ -50,10 +51,7 @@ export function ActionItemControls({
   );
 }
 
-const REQUEST_TYPE_OPTIONS = REQUEST_TYPES.map((value) => REQUEST_TYPE_LABELS[value]);
-const LABEL_TO_TYPE = Object.fromEntries(
-  REQUEST_TYPES.map((value) => [REQUEST_TYPE_LABELS[value], value]),
-);
+const REQUEST_TYPE_OPTIONS = toOptions(REQUEST_TYPES, REQUEST_TYPE_LABELS);
 
 /** Collapsible "ask Operava for something" form. */
 export function NewRequestForm({ projectId }: { projectId: string }) {
@@ -82,17 +80,13 @@ export function NewRequestForm({ projectId }: { projectId: string }) {
 
   return (
     <form
-      action={(formData) => {
-        const label = String(formData.get("typeLabel") ?? "");
-        formData.set("type", LABEL_TO_TYPE[label] ?? "");
-        return action(formData);
-      }}
+      action={action}
       className="flex flex-col gap-4 rounded-lg border border-line bg-muted/60 p-4 sm:p-5"
     >
       <input type="hidden" name="projectId" value={projectId} />
-      <Select
+      <EnumSelect
         id="request-type"
-        name="typeLabel"
+        name="type"
         label="What kind of request is this?"
         options={REQUEST_TYPE_OPTIONS}
         required

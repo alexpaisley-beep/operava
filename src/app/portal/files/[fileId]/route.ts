@@ -24,13 +24,16 @@ export async function GET(
   if (!parsed.success) return new Response("Not found", { status: 404 });
 
   try {
+    // viewerActor() is inside the try on purpose: a client profile somehow
+    // missing its company link throws `forbidden`, which should read as "not
+    // found" here rather than a 500.
     const url = await createFileDownloadUrl(
       { db: createServiceClient(), actor: viewerActor(viewer), source: "portal" },
       parsed.data,
     );
     return Response.redirect(url, 302);
   } catch (error) {
-    if (isPortalError(error) && error.code === "not_found") {
+    if (isPortalError(error) && (error.code === "not_found" || error.code === "forbidden")) {
       return new Response("Not found", { status: 404 });
     }
     console.error("portal.file_download_failed", error);
