@@ -75,6 +75,66 @@ src/
 Copy lives in `src/content/*` as typed data, so wording changes never require
 touching layout.
 
+## Customer portal + Operava MCP
+
+The same app hosts a customer-facing project portal, an internal Operava admin
+surface, and a remote MCP server — all on one Supabase-backed domain model.
+Full design notes are in [`docs/PORTAL_ARCHITECTURE.md`](docs/PORTAL_ARCHITECTURE.md).
+
+```
+src/
+  app/
+    portal/                          Customer portal (auth-gated)
+      login/                         Password + magic-link sign in
+      auth/                          Invite/callback/set-password
+      (app)/                         Dashboard, project pages, requests
+      files/[fileId]/                Signed-URL file downloads
+    admin/                           Operava staff surface
+      page.tsx                       Portfolio overview
+      customers/                     Customers, invites, new projects
+      projects/[projectId]/          Project control center
+    api/mcp/[[...key]]/              Operava MCP (streamable HTTP)
+  lib/portal/
+    authz.ts transitions.ts         Pure authorization + state machines
+    validation.ts                   zod schemas shared by UI and MCP
+    services/                       The one write path (authorize→validate→
+                                    mutate→audit→return state)
+    reads/                          customer.ts (RLS) · internal.ts (service)
+    serialize.ts                    Customer vs internal view models
+    audit.ts notify.ts             Audit trail + customer notifications
+    mcp/                            Tool registry, key auth, idempotency
+  proxy.ts                          Session refresh for /portal + /admin
+supabase/migrations/                Baseline (live export) + v1 extensions
+tests/                              unit/ (vitest) + rls/ (real Postgres)
+```
+
+- **One source of truth.** UI, portal and MCP all call `lib/portal/services/*`,
+  so authorization and business rules cannot diverge between them.
+- **Two database clients.** Customer reads use a cookie-bound client (RLS is
+  load-bearing); the service layer uses a service-role client after an explicit
+  authorization decision. Column-level grants keep internal fields off the
+  customer API role even on a direct PostgREST call.
+- **Audit + idempotency.** Every mutation records an `activity_log` entry with
+  actor type (internal / customer / mcp / system); MCP writes are idempotent by
+  key.
+
+### Portal commands
+
+```bash
+npm run test         # unit tests (vitest)
+npm run test:rls     # RLS integration — spins up a scratch Postgres and
+                     # applies the real migrations (skips if none available)
+npm run test:all     # both
+```
+
+### Configuration
+
+The portal needs four variables (see `.env.example`): `NEXT_PUBLIC_SUPABASE_URL`,
+`NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (server-only), and
+`OPERAVA_MCP_KEY` (server-only). Without them the marketing site is unaffected
+and the portal shows a "not configured" state. Customer notifications reuse the
+existing `RESEND_API_KEY`.
+
 ## Where leads go
 
 Every submission is normalised into a single `Lead` shape

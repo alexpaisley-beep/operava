@@ -3,6 +3,13 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  experimental: {
+    serverActions: {
+      // Admin deliverable uploads go through a server action; the storage
+      // bucket caps files at 25 MB, this must clear that plus form overhead.
+      bodySizeLimit: "26mb",
+    },
+  },
   async headers() {
     return [
       {

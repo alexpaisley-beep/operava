@@ -77,6 +77,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     items: [
       { href: "/book", label: "Book a discovery call" },
       { href: "/request-software", label: "Request custom software" },
+      { href: "/portal", label: "Client portal" },
     ],
   },
 ];
